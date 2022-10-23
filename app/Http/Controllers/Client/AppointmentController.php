@@ -29,6 +29,7 @@ class AppointmentController extends Controller
   public function create()
   {
     //
+
   }
 
   /**
@@ -40,6 +41,26 @@ class AppointmentController extends Controller
   public function store(Request $request)
   {
     //
+    $request->validate([
+      'name' => 'required',
+      'age' => 'required|integer',
+      'sex' => 'required|in:male,female',
+      'date' => 'required',
+      'service' => 'required',
+      'dentist' => 'required',
+    ]);
+
+    $appointment = Appointment::create([
+      'name' => $request->name,
+      'age' => $request->age,
+      'sex' => $request->date,
+      'date' => $request->date,
+      'service' => $request->service,
+      'dentist' => $request->dentist,
+      'user_id' => auth()->user()->id,
+    ]);
+
+    return redirect()->route('client.appointment.index');
   }
 
   /**

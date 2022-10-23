@@ -78,4 +78,5 @@ Route::controller(AuthController::class)
     Route::post('login', 'login')->name('login');
     Route::post('register', 'login')->name('register');
     Route::get('sign-in', 'signIn')->name('sign-in');
+    Route::post('register-client', 'registerClient')->name('register-client');
   });

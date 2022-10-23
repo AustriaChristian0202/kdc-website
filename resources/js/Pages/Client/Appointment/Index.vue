@@ -85,9 +85,23 @@
     </ClientLayout>
 </template>
 
-<script>
+<script setup>
 import ClientLayout from "@/Layouts/ClientLayout.vue";
-export default { components: { ClientLayout } };
+import { Inertia } from "@inertiajs/inertia";
+import { reactive } from "vue";
+
+const form = reactive({
+    name: "",
+    age: "",
+    sex: "",
+    service: "",
+    dentist: "",
+    date: "",
+});
+
+const submit = () => {
+    Inertia.post("");
+};
 </script>
 
 <style lang="scss" scoped></style>
