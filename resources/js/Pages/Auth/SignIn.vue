@@ -6,7 +6,9 @@
             class="w-screen h-screen p-[30px] grid place-items-center md:px-[15%] lg:px-[35%]"
         >
             <div
+
                 class="bg-slate-100 w-full h-full p-2 px-[30px] rounded-lg grid place-items-center border border-slate-200 dark:bg-slate-700 dark:border-slate-600"
+
             >
                 <div class="w-full">
                     <div class="w-full mb-5 rounded-lg grid place-items-center">
@@ -77,12 +79,12 @@
                             :message="form.errors.password"
                         />
                         <button
-                            class="bg-blue-500 text-slate-50 w-full py-3 rounded-lg font-medium outline outline-1 outline-blue-600 hover:bg-blue-600 hover:outline-blue-700 hover:shadow-lg dark:bg-blue-400 dark:text-slate-900 dark:outline-blue-300 dark:hover:bg-blue-500 dark:hover:outline-blue-400 dark:hover:text-slate-800 transition-all"
+                            class="bg-blue-500 text-slate-50 w-full py-3 rounded-lg font-bold outline outline-1 outline-blue-600 hover:bg-blue-600 hover:outline-blue-700 hover:shadow-lg dark:bg-blue-400 dark:text-slate-900 dark:outline-blue-300 dark:hover:bg-blue-500 dark:hover:outline-blue-400 dark:hover:text-slate-800 transition-all uppercase"
                         >
                             Sign in
                         </button>
                     </form>
-                    <p class="mt-3 text-center">
+                    <p class="mt-2 text-center">
                         Don't have an account?
                         <a
                             :href="route('auth.sign-up')"
