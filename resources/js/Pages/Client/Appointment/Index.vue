@@ -13,11 +13,12 @@
                 class="bg-slate-200 w-full mb-5 p-3 rounded-lg border border-slate-200 dark:bg-slate-700 dark:border-slate-600 hover:shadow-2xl dark:hover:bg-slate-800 dark:hover:border-slate-50 hover:bg-slate-400 hover:border-slate-500 transition-all lg:w-1/2"
             >
                 <p class="text-center mb-5">APPOINTMENT FORM</p>
-                <form action="" method="POST">
+                <form @submit.prevent="submit" method="POST">
                     <input
                         type="text"
                         name="appointment_name"
                         placeholder="Name"
+                        v-model="form.name"
                         required
                         class="bg-slate-50 w-full mt-5 mb-2 px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all"
                     />
@@ -25,49 +26,71 @@
                         type="text"
                         name="appointment_age"
                         placeholder="Age"
+                        v-model="form.age"
+                        required
+                        class="bg-slate-50 w-full mb-2 px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all"
+                    />
+                    <input
+                        type="text"
+                        name="contact"
+                        placeholder="Contact Number"
+                        v-model="form.contact"
                         required
                         class="bg-slate-50 w-full mb-2 px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all"
                     />
                     <select
                         name=""
                         id=""
+                        v-model="form.sex"
                         class="bg-slate-50 w-full mb-2 px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all appearance-none"
                     >
                         <option value="">Sex</option>
-                        <option value="">Male</option>
-                        <option value="">Femal</option>
-                        <option value="">Intersex</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
                     </select>
                     <select
                         name=""
                         id=""
+                        v-model="form.service"
                         class="bg-slate-50 w-full mb-2 px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all appearance-none"
                     >
                         <option value="">Service</option>
-                        <option value="">Consultation</option>
-                        <option value="">Teeth Whitening</option>
-                        <option value="">Teeth Cleaning</option>
-                        <option value="">Orthodontic Treatment</option>
-                        <option value="">Modern Dentistry Services</option>
-                        <option value="">Teeth/Dental Bonding</option>
-                        <option value="">Cosmetic Fillings</option>
-                        <option value="">Dentures</option>
-                        <option value="">Root Canal Therapy</option>
+                        <option value="Consultation">Consultation</option>
+                        <option value="Teeth Whitening">Teeth Whitening</option>
+                        <option value="Teeth Cleaning">Teeth Cleaning</option>
+                        <option value="Orthodontic Treatment">
+                            Orthodontic Treatment
+                        </option>
+                        <option value="Modern Dentistry Services">
+                            Modern Dentistry Services
+                        </option>
+                        <option value="Teeth/Dental Bonding">
+                            Teeth/Dental Bonding
+                        </option>
+                        <option value="Cosmetic Fillings">
+                            Cosmetic Fillings
+                        </option>
+                        <option value="Dentures">Dentures</option>
+                        <option value="Root Canal Therapy">
+                            Root Canal Therapy
+                        </option>
                     </select>
                     <select
                         name=""
                         id=""
+                        v-model="form.dentist"
                         class="bg-slate-50 w-full mb-2 px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all appearance-none"
                     >
                         <option value="">Dentist</option>
-                        <option value="">Dr. Raymond S. Kasilag</option>
-                        <option value="">Dr. Desiree Z. Kasilag</option>
-                        <option value="">Dr. Mark S. Kasilag</option>
+                        <option v-for="dentist in dentists" :value="dentist.id">
+                            {{ dentist.name }}
+                        </option>
                     </select>
                     <input
                         type="datetime-local"
                         name="appointment_date"
                         placeholder="Date"
+                        v-model="form.date"
                         required
                         class="bg-slate-50 w-full mb-2 px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all"
                     />
@@ -89,18 +112,31 @@
 import ClientLayout from "@/Layouts/ClientLayout.vue";
 import { Inertia } from "@inertiajs/inertia";
 import { reactive } from "vue";
+import { useForm } from "@inertiajs/inertia-vue3";
 
-const form = reactive({
+defineProps({
+    dentists: {
+        type: Array,
+        default: [],
+    },
+});
+
+const form = useForm({
     name: "",
     age: "",
     sex: "",
     service: "",
     dentist: "",
     date: "",
+    contact: "",
 });
 
 const submit = () => {
-    Inertia.post("");
+    form.post(route("client.appointment.store"), {
+        onSuccess: () => {
+            form.reset();
+        },
+    });
 };
 </script>
 

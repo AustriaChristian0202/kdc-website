@@ -41,6 +41,7 @@ Route::middleware([
   Route::prefix('client')
     ->name('client.')
     ->group(function () {
+
       Route::resource('appointment', AppointmentController::class);
     });
 

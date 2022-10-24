@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\cr;
+use App\Models\User;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -18,7 +20,16 @@ class AppointmentController extends Controller
   public function index()
   {
     //
-    return Inertia::render('Client/Appointment/Index', []);
+    $dentists = User::where('role', 'admin')->get([
+      'name', 'id'
+    ]);
+
+
+    return Inertia::render('Client/Appointment/Index', [
+
+      'dentists' => $dentists,
+
+    ]);
   }
 
   /**
@@ -40,27 +51,36 @@ class AppointmentController extends Controller
    */
   public function store(Request $request)
   {
+
     //
     $request->validate([
-      'name' => 'required',
+      'name' => 'required|string|max:255',
       'age' => 'required|integer',
       'sex' => 'required|in:male,female',
-      'date' => 'required',
+      'date' => 'required|date',
       'service' => 'required',
-      'dentist' => 'required',
+      'dentist' => 'required|exists:users,id',
+      'contact' => 'required|string|max:255',
     ]);
 
     $appointment = Appointment::create([
       'name' => $request->name,
       'age' => $request->age,
       'sex' => $request->date,
-      'date' => $request->date,
+      'schedule' => $request->date,
       'service' => $request->service,
-      'dentist' => $request->dentist,
+      'dentist_id' => $request->dentist,
       'user_id' => auth()->user()->id,
+      'created_by' => auth()->user()->id,
+      'contact' => $request->contact,
     ]);
 
-    return redirect()->route('client.appointment.index');
+
+    return redirect()->back()->with(
+      [
+        'message' => 'Fuck this shit',
+      ]
+    );
   }
 
   /**

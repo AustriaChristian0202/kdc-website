@@ -12,10 +12,11 @@ class Appointment extends Model
   protected $fillable = [
     'name',
     'age',
-    'sex',
-    'date',
+    'schedule',
+    'contact',
     'service',
-    'dentist',
-    'user_id'
+    'dentist_id',
+    'user_id',
+    'created_by'
   ];
 }

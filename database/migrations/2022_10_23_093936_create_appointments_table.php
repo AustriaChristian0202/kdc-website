@@ -31,6 +31,7 @@ return new class extends Migration
         "Dentures",
         "Root Canal Therapy"
       ]);
+      $table->dateTime('schedule');
       $table->unsignedBigInteger('dentist_id');
       $table->enum('sex', ['male', 'female']);
       $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
