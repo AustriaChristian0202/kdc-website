@@ -44,4 +44,32 @@ class Appointment extends Controller
       'appointments' => $appointments,
     ]);
   }
+
+  public function statusChange(Request $request)
+  {
+    $request->validate([
+      'id' => 'required|exists:appointments,id',
+      'status' => 'required|in:pending,approved,rejected',
+    ]);
+
+    $appointment = ModelsAppointment::find($request->id);
+    $appointment->status = $request->status;
+    $appointment->save();
+
+    return redirect()->back()->with([
+      'message' => [
+        'type' => 'success',
+        'content' => 'Appointment status changed successfully',
+      ]
+    ]);
+  }
+
+  public function appointmentsByDate($date = null)
+  {
+    $date = $date ?? date('Y-m-d');
+    $appointments = ModelsAppointment::whereDate('schedule', $date)
+      ->with('dentist')->get();
+
+    return response()->json($appointments);
+  }
 }
