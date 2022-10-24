@@ -8,6 +8,7 @@ use App\Models\cr;
 use App\Models\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class AppointmentController extends Controller
@@ -24,11 +25,15 @@ class AppointmentController extends Controller
       'name', 'id'
     ]);
 
+    // get today appointment
+    $today = Appointment::where('user_id', Auth::user()->id)->whereDate('schedule', today()->format(
+      'Y-m-d'
+    ))->with('dentist')->first();
+
 
     return Inertia::render('Client/Appointment/Index', [
-
       'dentists' => $dentists,
-
+      'today' => $today,
     ]);
   }
 
