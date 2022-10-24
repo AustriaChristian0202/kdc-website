@@ -19,7 +19,7 @@ class DentistSeeder extends Seeder
     $dentists = [
       [
         'name' => 'Dr. Raymond S. Kasilag',
-        'email' => 'denstist1@mail.com',
+        'email' => 'dentist1@mail.com',
         'password' => Hash::make('password'),
         'role' => 'admin',
         'email_verified_at' => now(),

@@ -57,6 +57,7 @@ Route::middleware([
         ->group(function () {
           Route::get('', 'index')->name('index');
           Route::post('status-change', 'statusChange')->name('status-change');
+          Route::get('appointments-by-date/{date?}', 'appointmentsByDate')->name('by-date');
         });
 
       Route::get('profile', function () {

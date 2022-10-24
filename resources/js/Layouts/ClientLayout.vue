@@ -210,7 +210,9 @@
                 <div @click="toggleSidebar" class="w-[20%] h-screen"></div>
             </div>
         </header>
-        <slot></slot>
+        <div class="overflow-x-auto">
+            <slot></slot>
+        </div>
     </body>
 </template>
 

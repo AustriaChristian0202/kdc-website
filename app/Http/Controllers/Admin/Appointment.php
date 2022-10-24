@@ -63,4 +63,13 @@ class Appointment extends Controller
       ]
     ]);
   }
+
+  public function appointmentsByDate($date = null)
+  {
+    $date = $date ?? date('Y-m-d');
+    $appointments = ModelsAppointment::whereDate('schedule', $date)
+      ->with('dentist')->get();
+
+    return response()->json($appointments);
+  }
 }

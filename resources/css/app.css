@@ -5,3 +5,7 @@
 html {
 @apply scroll-smooth;
 }
+
+.fc-daygrid-day-frame{
+@apply cursor-pointer;
+}

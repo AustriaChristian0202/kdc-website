@@ -50,12 +50,12 @@
                     <ul class="hidden lg:flex gap-2">
                         <ul class="hidden lg:flex gap-2">
                             <li>
-                                <a
-                                    href="../pages/home.php"
+                                <Link
+                                    :href="route('admin.home.index')"
                                     class="w-full px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
                                 >
                                     Home
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <Link
@@ -138,8 +138,8 @@
                             class="w-full p-5 text-slate-900 dark:text-slate-50"
                         >
                             <li class="w-full">
-                                <a
-                                    href="../pages/home.php"
+                                <Link
+                                    :href="route('admin.home.index')"
                                     class="w-full mb-2 px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
                                     id="sidebar-home"
                                 >
@@ -162,7 +162,7 @@
                                         />
                                     </span>
                                     Home
-                                </a>
+                                </Link>
                             </li>
                             <li class="w-full">
                                 <Link
@@ -234,7 +234,9 @@
                 <div @click="toggleSidebar" class="w-[20%] h-screen"></div>
             </div>
         </header>
-        <slot></slot>
+        <div class="overflow-x-auto">
+            <slot></slot>
+        </div>
     </body>
 </template>
 
