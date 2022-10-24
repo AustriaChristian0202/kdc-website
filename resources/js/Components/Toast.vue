@@ -1,9 +1,8 @@
 <template>
-    <div class="sticky top-0 flex w-full justify-end z-50">
+    <div v-show="show" class="sticky top-0 flex w-full justify-end z-50">
         <div
-            v-show="show"
             id="toast-success"
-            class="absolute flex items-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 z-50 top-5 right-5"
+            class="absolute flex items-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 z-50 top-5 right-5 justify-end"
             role="alert"
         >
             <div
@@ -24,7 +23,7 @@
                 </svg>
                 <span class="sr-only">Check icon</span>
             </div>
-            <div class="ml-3 text-sm font-normal">Item moved successfully.</div>
+            <div class="ml-3 text-sm font-normal">{{ message?.content }}</div>
             <button
                 type="button"
                 @click="show = false"
@@ -57,6 +56,10 @@ export default {
         show: {
             type: Boolean,
             default: false,
+        },
+        message: {
+            type: Object,
+            default: null,
         },
     },
 };

@@ -78,7 +78,10 @@ class AppointmentController extends Controller
 
     return redirect()->back()->with(
       [
-        'message' => 'Fuck this shit',
+        'message' => [
+          'type' => 'success',
+          'content' => 'Appointment created successfully'
+        ],
       ]
     );
   }
@@ -126,5 +129,14 @@ class AppointmentController extends Controller
   public function destroy(Appointment $cr)
   {
     //
+  }
+
+  public function myAppointments()
+  {
+    $appointments = Appointment::where('user_id', auth()->user()->id)->get();
+
+    return Inertia::render('Client/MyAppointments/Index', [
+      'appointments' => $appointments,
+    ]);
   }
 }

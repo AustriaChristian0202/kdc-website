@@ -43,6 +43,7 @@ Route::middleware([
     ->group(function () {
 
       Route::resource('appointment', AppointmentController::class);
+      Route::get('my-appointments', [AppointmentController::class, 'myAppointments'])->name('my-appointments');
     });
 
   Route::prefix('admin')

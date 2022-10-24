@@ -2,7 +2,10 @@
     <body
         class="bg-slate-50 text-slate-900 text-sm dark:bg-slate-900 dark:text-slate-50 transition-all min-h-screen"
     >
-        <Toast :show="hasMessage" />
+        <Toast
+            :show="$page.props.flash.message != null"
+            :message="$page.props.flash.message"
+        />
 
         <header
             class="bg-slate-400 w-full h-[60px] grid place-items-center fixed top-0 left-0 z-20 dark:bg-slate-500 dark:border-slate-300"
@@ -27,8 +30,8 @@
                             class="h-2/3 hidden dark:inline lg:hidden"
                         />
                     </button>
-                    <a
-                        href=""
+                    <Link
+                        href="/"
                         class="h-full flex items-center gap-1 text-base font-bold uppercase"
                     >
                         <img
@@ -46,16 +49,24 @@
                         >
                             Kasilag Dental Clinic
                         </p>
-                    </a>
+                    </Link>
                 </div>
                 <div class="lg:flex">
                     <ul class="hidden lg:flex gap-2">
+                        <Link :href="route('client.my-appointments')">
+                            <a
+                                href=""
+                                class="w-full px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
+                            >
+                                My Appointments
+                            </a>
+                        </Link>
                         <Link :href="route('client.appointment.index')">
                             <a
                                 href=""
                                 class="w-full px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
                             >
-                                Appointment
+                                Make an Appointment
                             </a>
                         </Link>
                         <li>
@@ -209,9 +220,7 @@ import { Link } from "@inertiajs/inertia-vue3";
 import Toast from "@/Components/Toast.vue";
 export default {
     name: "App",
-    props: {
-        flash: Object,
-    },
+
     components: {
         Link,
         Toast,
@@ -221,11 +230,7 @@ export default {
             showSidebar: false,
         };
     },
-    computed: {
-        hasMessage() {
-            return this.flash;
-        },
-    },
+
     methods: {
         toggleSidebar() {
             this.showSidebar = !this.showSidebar;

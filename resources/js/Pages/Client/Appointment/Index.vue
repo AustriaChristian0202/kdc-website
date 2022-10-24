@@ -22,6 +22,7 @@
                         required
                         class="bg-slate-50 w-full mt-5 mb-2 px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all"
                     />
+                    <InputError :message="form.errors.name" />
                     <input
                         type="text"
                         name="appointment_age"
@@ -30,6 +31,7 @@
                         required
                         class="bg-slate-50 w-full mb-2 px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all"
                     />
+                    <InputError :message="form.errors.age" />
                     <input
                         type="text"
                         name="contact"
@@ -38,6 +40,7 @@
                         required
                         class="bg-slate-50 w-full mb-2 px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all"
                     />
+                    <InputError :message="form.errors.contact" />
                     <select
                         name=""
                         id=""
@@ -48,6 +51,7 @@
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
+                    <InputError :message="form.errors.sex" />
                     <select
                         name=""
                         id=""
@@ -75,6 +79,7 @@
                             Root Canal Therapy
                         </option>
                     </select>
+                    <InputError :message="form.errors.service" />
                     <select
                         name=""
                         id=""
@@ -86,6 +91,7 @@
                             {{ dentist.name }}
                         </option>
                     </select>
+                    <InputError :message="form.errors.dentist" />
                     <input
                         type="datetime-local"
                         name="appointment_date"
@@ -94,6 +100,7 @@
                         required
                         class="bg-slate-50 w-full mb-2 px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all"
                     />
+                    <InputError :message="form.errors.date" />
 
                     <div class="w-full flex justify-end">
                         <button
@@ -113,6 +120,7 @@ import ClientLayout from "@/Layouts/ClientLayout.vue";
 import { Inertia } from "@inertiajs/inertia";
 import { reactive } from "vue";
 import { useForm } from "@inertiajs/inertia-vue3";
+import InputError from "@/Components/InputError.vue";
 
 defineProps({
     dentists: {
