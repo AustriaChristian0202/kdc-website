@@ -3,6 +3,34 @@
         <div class="mt-14 w-full">
             <div class="max-w-7xl mx-auto pt-14">
                 <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+                    <div class="pb-4 bg-white dark:bg-gray-900 p-4">
+                        <label for="table-search" class="sr-only">Search</label>
+                        <div class="relative mt-1">
+                            <div
+                                class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+                            >
+                                <svg
+                                    class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                    aria-hidden="true"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                        clip-rule="evenodd"
+                                    ></path>
+                                </svg>
+                            </div>
+                            <input
+                                type="text"
+                                id="table-search"
+                                class="block p-2 pl-10 w-80 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Search for items"
+                            />
+                        </div>
+                    </div>
                     <table
                         class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
                     >
@@ -10,89 +38,116 @@
                             class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
                         >
                             <tr>
-                                <th scope="col" class="py-3 px-6">
-                                    Product name
-                                </th>
-                                <th scope="col" class="py-3 px-6">Color</th>
-                                <th scope="col" class="py-3 px-6">Category</th>
-                                <th scope="col" class="py-3 px-6">Price</th>
-                                <th scope="col" class="py-3 px-6">
-                                    <span class="sr-only">Edit</span>
-                                </th>
+                                <th scope="col" class="py-3 px-6">ID</th>
+                                <th scope="col" class="py-3 px-6">Name</th>
+                                <th scope="col" class="py-3 px-6">Age</th>
+                                <th scope="col" class="py-3 px-6">Service</th>
+                                <th scope="col" class="py-3 px-6">Dentist</th>
+                                <th scope="col" class="py-3 px-6">Status</th>
+                                <th scope="col" class="py-3 px-6">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr
+                                v-if="data.length > 0"
+                                v-for="item in data"
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                             >
+                                <td class="py-4 px-6">
+                                    {{ item.id }}
+                                </td>
                                 <th
                                     scope="row"
                                     class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                 >
-                                    Apple MacBook Pro 17"
+                                    {{ item.name }}
                                 </th>
-                                <td class="py-4 px-6">Sliver</td>
-                                <td class="py-4 px-6">Laptop</td>
-                                <td class="py-4 px-6">$2999</td>
-                                <td class="py-4 px-6 text-right">
-                                    <a
-                                        href="#"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                        >Edit</a
+                                <td class="py-4 px-6">{{ item.age }}</td>
+                                <td class="py-4 px-6">{{ item.service }}</td>
+                                <td class="py-4 px-6">
+                                    {{ item.dentist.name }}
+                                </td>
+                                <td class="py-4 px-6">
+                                    <div
+                                        class="flex items-center first-letter:uppercase justify-center font-bold rounded-xl"
+                                        :class="{
+                                            'bg-green-500 text-green-700':
+                                                item.status === 'approved',
+                                            'bg-red-500':
+                                                item.status === 'rejected',
+                                            'bg-yellow-100 text-yellow-700 ':
+                                                item.status === 'pending',
+                                        }"
                                     >
+                                        {{ item.status }}
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <div class="flex gap-2">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.5"
+                                            stroke="currentColor"
+                                            class="w-6 h-6"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                            />
+                                        </svg>
+
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.5"
+                                            stroke="currentColor"
+                                            class="w-6 h-6"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                            />
+                                        </svg>
+                                    </div>
                                 </td>
                             </tr>
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                            >
-                                <th
-                                    scope="row"
+                            <tr v-else>
+                                <td
+                                    colspan="5"
                                     class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                 >
-                                    Microsoft Surface Pro
-                                </th>
-                                <td class="py-4 px-6">White</td>
-                                <td class="py-4 px-6">Laptop PC</td>
-                                <td class="py-4 px-6">$1999</td>
-                                <td class="py-4 px-6 text-right">
-                                    <a
-                                        href="#"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                        >Edit</a
-                                    >
-                                </td>
-                            </tr>
-                            <tr
-                                class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
-                            >
-                                <th
-                                    scope="row"
-                                    class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                >
-                                    Magic Mouse 2
-                                </th>
-                                <td class="py-4 px-6">Black</td>
-                                <td class="py-4 px-6">Accessories</td>
-                                <td class="py-4 px-6">$99</td>
-                                <td class="py-4 px-6 text-right">
-                                    <a
-                                        href="#"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                        >Edit</a
-                                    >
+                                    No data found
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                    <Pagination :links="link" />
                 </div>
             </div>
         </div>
     </AdminLayout>
 </template>
 
-<script>
+<script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-export default { components: { AdminLayout } };
+import { computed } from "vue";
+import Pagination from "@/Components/Pagination.vue";
+const props = defineProps({
+    // props
+    appointments: {
+        type: Object,
+        default: () => {},
+    },
+});
+
+// computed
+const data = computed(() => props.appointments.data);
+const link = computed(() => props.appointments.links);
 </script>
 
 <style lang="scss" scoped></style>

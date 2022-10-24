@@ -19,4 +19,14 @@ class Appointment extends Model
     'user_id',
     'created_by'
   ];
+
+  public function dentist()
+  {
+    return $this->belongsTo(User::class, 'dentist_id');
+  }
+
+  public function client()
+  {
+    return $this->belongsTo(User::class, 'user_id');
+  }
 }
