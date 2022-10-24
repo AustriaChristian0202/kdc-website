@@ -56,6 +56,7 @@ Route::middleware([
         ->prefix('appointment')
         ->group(function () {
           Route::get('', 'index')->name('index');
+          Route::post('status-change', 'statusChange')->name('status-change');
         });
 
       Route::get('profile', function () {

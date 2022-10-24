@@ -59,13 +59,13 @@
                                     <div
                                         class="flex items-center first-letter:uppercase justify-center font-bold rounded-xl"
                                         :class="{
-                                            'bg-green-500 text-green-700':
+                                            'bg-green-200 text-green-700':
                                                 appointment.status ===
                                                 'approved',
-                                            'bg-red-500':
+                                            'bg-red-200 text-red-700':
                                                 appointment.status ===
                                                 'rejected',
-                                            'bg-yellow-100 text-yellow-700 ':
+                                            'bg-yellow-200 text-yellow-700 ':
                                                 appointment.status ===
                                                 'pending',
                                         }"
