@@ -6,7 +6,7 @@
             class="bg-slate-400 w-full h-[60px] grid place-items-center fixed top-0 left-0 z-20 dark:bg-slate-500 dark:border-slate-300"
         >
             <nav
-                class="bg-slate-500 w-full h-[40px] flex items-center justify-between dark:bg-slate-400"
+                class="bg-slate-400 w-full h-[40px] flex items-center justify-between dark:bg-slate-500"
             >
                 <div class="h-full ml-[15px] flex gap-1">
                     <button
