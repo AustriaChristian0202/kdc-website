@@ -1,6 +1,6 @@
 <template>
     <ClientLayout>
-        <main class="bg-slate-50 w-full p-3 pt-[80px] lg:flex flex-col items-center">
+        <main class="bg-slate-50 w-full p-3 pt-[80px] lg:flex flex-col items-center dark:bg-slate-900">
             <div
                 class="bg-slate-200 w-full mb-5 p-3 rounded-lg border border-slate-300 dark:bg-slate-700 dark:border-slate-600 hover:shadow-2xl dark:hover:bg-slate-800 dark:hover:border-slate-50 hover:bg-slate-400 hover:border-slate-500 transition-all lg:w-1/2">
                 <p class="text-center mb-5 uppercase">Active appointment</p>
