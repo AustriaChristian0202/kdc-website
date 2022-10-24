@@ -15,7 +15,7 @@ return new class extends Migration
   {
     Schema::create('appointments', function (Blueprint $table) {
       $table->id();
-      $table->unsignedBigInteger('user_id');
+      $table->unsignedBigInteger('user_id')->nullable();
       $table->unsignedBigInteger('created_by');
       $table->string('name');
       $table->integer('age');

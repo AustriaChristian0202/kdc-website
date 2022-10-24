@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment as ModelsAppointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class Appointment extends Controller
@@ -71,5 +72,34 @@ class Appointment extends Controller
       ->with('dentist')->get();
 
     return response()->json($appointments);
+  }
+
+  public function store(Request $request)
+  {
+
+    $request->validate([
+      'name' => 'required|string|max:255',
+      'age' => 'required|integer',
+      'contact' => 'required|string|max:255',
+      'service' => 'required|string|max:255',
+      'date' => 'required|date',
+    ]);
+
+    $appointment = new ModelsAppointment();
+    $appointment->name = $request->name;
+    $appointment->age = $request->age;
+    $appointment->contact = $request->contact;
+    $appointment->service = $request->service;
+    $appointment->schedule = $request->date;
+    $appointment->dentist_id = Auth::user()->id;
+    $appointment->created_by = Auth::user()->id;
+    $appointment->save();
+
+    return redirect()->back()->with([
+      'message' => [
+        'type' => 'success',
+        'content' => 'Appointment created successfully',
+      ]
+    ]);
   }
 }

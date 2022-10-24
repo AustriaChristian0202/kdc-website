@@ -2,6 +2,10 @@
     <body
         class="bg-slate-50 text-slate-900 text-sm dark:bg-slate-900 dark:text-slate-50 transition-all min-h-screen w-full"
     >
+        <Toast
+            :show="$page.props.flash.message != null"
+            :message="$page.props.flash.message"
+        />
         <header
             class="bg-slate-400 w-full h-[60px] grid place-items-center fixed top-0 left-0 z-20 dark:bg-slate-500 dark:border-slate-300"
         >
@@ -244,10 +248,12 @@
 <script>
 import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-vue3";
+import Toast from "@/Components/Toast.vue";
 export default {
     name: "App",
     components: {
         Link,
+        Toast,
     },
     data() {
         return {

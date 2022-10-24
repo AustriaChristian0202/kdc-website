@@ -58,6 +58,7 @@ Route::middleware([
           Route::get('', 'index')->name('index');
           Route::post('status-change', 'statusChange')->name('status-change');
           Route::get('appointments-by-date/{date?}', 'appointmentsByDate')->name('by-date');
+          Route::post('create', 'store')->name('store');
         });
 
       Route::get('profile', function () {
