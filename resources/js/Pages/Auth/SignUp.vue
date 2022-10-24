@@ -6,10 +6,22 @@
             class="w-screen h-screen p-[30px] grid place-items-center md:px-[15%] lg:px-[35%]"
         >
             <div
-                class="bg-slate-100 w-full h-4/5 p-2 px-[30px] rounded-lg grid place-items-center border border-slate-200 dark:bg-slate-700 dark:border-slate-600 md:h-[90%]"
+                class="bg-slate-100 w-full p-2 pb-10 px-[30px] rounded-lg grid place-items-center border border-slate-200 dark:bg-slate-700 dark:border-slate-600 md:h-[90%]"
             >
                 <div class="w-full">
-                    <p class="mb-5 text-center text-lg uppercase font-medium">
+                    <div class="w-full mb-5 rounded-lg grid place-items-center">
+                        <img
+                            src="/resources/logo-large-dark-mode.png"
+                            alt=""
+                            class="inline dark:hidden"
+                        />
+                        <img
+                            src="/resources/logo-large.png"
+                            alt=""
+                            class="hidden dark:inline"
+                        />
+                    </div>
+                    <p class="mb-3 text-base text-center">
                         Create new account
                     </p>
 
@@ -67,7 +79,7 @@
                         />
                         <button
                             type="submit"
-                            class="bg-blue-500 text-slate-50 w-full py-3 rounded-lg font-medium outline outline-1 outline-blue-600 hover:bg-blue-600 hover:outline-blue-700 hover:shadow-lg dark:bg-blue-400 dark:text-slate-900 dark:outline-blue-300 dark:hover:bg-blue-500 dark:hover:outline-blue-400 dark:hover:text-slate-800 transition-all"
+                            class="bg-blue-500 text-slate-50 w-full py-3 rounded-lg font-bold outline outline-1 outline-blue-600 hover:bg-blue-600 hover:outline-blue-700 hover:shadow-lg dark:bg-blue-400 dark:text-slate-900 dark:outline-blue-300 dark:hover:bg-blue-500 dark:hover:outline-blue-400 dark:hover:text-slate-800 transition-all uppercase"
                         >
                             Register your account
                         </button>
@@ -75,7 +87,6 @@
                     <div class="w-full mt-2 text-center">
                         <a
                             :href="route('auth.sign-in')"
-                            class="underline underline-offset-2"
                             >Return to sign in form</a
                         >
                     </div>
