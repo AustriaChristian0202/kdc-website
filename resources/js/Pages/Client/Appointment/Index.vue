@@ -1,8 +1,8 @@
 <template>
     <ClientLayout>
-        <main class="w-full p-3 pt-[80px] lg:h-screen lg:flex flex-col items-center">
+        <main class="bg-slate-50 w-full p-3 pt-[80px] lg:flex flex-col items-center">
             <div
-                class="bg-slate-200 w-full mb-5 p-3 rounded-lg border border-slate-200 dark:bg-slate-700 dark:border-slate-600 hover:shadow-2xl dark:hover:bg-slate-800 dark:hover:border-slate-50 hover:bg-slate-400 hover:border-slate-500 transition-all lg:w-1/2">
+                class="bg-slate-200 w-full mb-5 p-3 rounded-lg border border-slate-300 dark:bg-slate-700 dark:border-slate-600 hover:shadow-2xl dark:hover:bg-slate-800 dark:hover:border-slate-50 hover:bg-slate-400 hover:border-slate-500 transition-all lg:w-1/2">
                 <p class="text-center mb-5 uppercase">Active appointment</p>
                 <p class="w-full truncate mt-2">Name:
                     <span class="text-slate-600 dark:text-slate-300">Lorem, ipsum dolor.</span>
@@ -25,7 +25,7 @@
             </div>
 
             <div
-                class="bg-slate-200 w-full mt-16 mb-5 p-3 rounded-lg border border-slate-200 dark:bg-slate-700 dark:border-slate-600 hover:shadow-2xl dark:hover:bg-slate-800 dark:hover:border-slate-50 hover:bg-slate-400 hover:border-slate-500 transition-all lg:w-1/2">
+                class="bg-slate-200 w-full mt-16 mb-5 p-3 rounded-lg border border-slate-300 dark:bg-slate-700 dark:border-slate-600 hover:shadow-2xl dark:hover:bg-slate-800 dark:hover:border-slate-50 hover:bg-slate-400 hover:border-slate-500 transition-all lg:w-1/2">
                 <p class="text-center mb-5 uppercase">Appointment form</p>
                 <form @submit.prevent="submit" method="POST">
                     <input type="text" name="appointment_name" placeholder="Name" v-model="form.name" required
@@ -90,7 +90,7 @@
             </div>
 
             <div
-                class="bg-slate-200 w-full mt-16 mb-5 p-3 rounded-lg border border-slate-200 dark:bg-slate-700 dark:border-slate-600 hover:shadow-2xl dark:hover:bg-slate-800 dark:hover:border-slate-50 hover:bg-slate-400 hover:border-slate-500 transition-all lg:w-1/2">
+                class="bg-slate-200 w-full mt-16 mb-5 p-3 rounded-lg border border-slate-300 dark:bg-slate-700 dark:border-slate-600 hover:shadow-2xl dark:hover:bg-slate-800 dark:hover:border-slate-50 hover:bg-slate-400 hover:border-slate-500 transition-all lg:w-1/2">
                 <p class="text-center mb-5 uppercase">Appointment history</p>
                 <p class="w-full truncate mt-2">Date:
                     <span class="text-slate-600 dark:text-slate-300">Lorem, ipsum dolor.</span>
