@@ -133,7 +133,9 @@ class AppointmentController extends Controller
 
   public function myAppointments()
   {
-    $appointments = Appointment::where('user_id', auth()->user()->id)->get();
+    $appointments = Appointment::where('user_id', auth()->user()->id)
+      ->with('dentist')
+      ->get();
 
     return Inertia::render('Client/MyAppointments/Index', [
       'appointments' => $appointments,
