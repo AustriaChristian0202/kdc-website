@@ -27,13 +27,10 @@ defineProps({
 
             <div>
                 <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                    <header class="mt-14 mb-2">
-                        <h1 class="text-2xl">Profile</h1>
-                    </header>
                     <div
                         v-if="$page.props.jetstream.canUpdateProfileInformation"
                     >
-                        <UpdateProfileInformationForm
+                        <UpdateProfileInformationForm class="mt-6"
                             :user="$page.props.user"
                         />
 
