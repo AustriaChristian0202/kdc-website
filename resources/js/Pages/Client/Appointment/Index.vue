@@ -155,7 +155,7 @@
                     <FullCalendar :options="calendarOptions" />
                     <InputError :message="form.errors.date" />
                     <div
-                        v-if="!isLoading"
+                        v-if="!isLoading && !isSunday"
                         class="flex my-4 flex-wrap gap-1 items-center justify-center"
                     >
                         <!-- loop time every hour from 9pm to 5pm -->

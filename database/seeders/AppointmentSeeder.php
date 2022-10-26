@@ -44,8 +44,12 @@ class AppointmentSeeder extends Seeder
             "Dentures",
             "Root Canal Therapy"
           ]),
-
-          'schedule' => fake()->dateTimeBetween('-1 year', '+1 year'),
+          // date between 2021 - 2022 sunday not included and 9:00 - 17:00 only
+          'schedule' => fake()->dateTimeBetween('2021-01-01', '2022-12-31', 'Asia/Manila')->setTime(
+            fake()->numberBetween(9, 17),
+            0,
+            0
+          ),
           'status' => fake()->randomElement(['pending', 'approved', 'rejected']),
           'sex' => fake()->randomElement(['male', 'female']),
           'age' => fake()->randomNumber(2),
