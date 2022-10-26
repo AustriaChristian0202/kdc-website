@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\cr;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -136,19 +137,55 @@ class AppointmentController extends Controller
    * @param  \App\Models\cr  $cr
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Appointment $cr)
+  public function destroy($id)
   {
-    //
+    // cancel appointment
+    $appointment = Appointment::find($id);
+    // check if is today is 1 day after appointment
+    if (today()->diffInDays($appointment->schedule) > 1) {
+      $appointment->delete();
+      return redirect()->back()->with(
+        [
+          'message' => [
+            'type' => 'success',
+            'content' => 'Appointment cancelled successfully'
+          ],
+        ]
+      );
+    } else {
+      return redirect()->back()->with(
+        [
+          'message' => [
+            'type' => 'error',
+            'content' => 'You can only cancel appointment 1 day before'
+          ],
+        ]
+      );
+    }
   }
 
   public function myAppointments()
   {
     $appointments = Appointment::where('user_id', auth()->user()->id)
       ->with('dentist')
+      ->latest()
       ->get();
 
     return Inertia::render('Client/MyAppointments/Index', [
       'appointments' => $appointments,
     ]);
+  }
+
+  public function getSelectedDateAppointment($date)
+  {
+    $appointment = Appointment::whereDate('schedule', $date)
+      ->get(['schedule'])
+      ->each(function ($appointment) {
+        // get only time of schedule
+        $appointment->schedule = Carbon::parse($appointment->schedule)->format('H:i');
+      });
+
+
+    return response()->json($appointment);
   }
 }
