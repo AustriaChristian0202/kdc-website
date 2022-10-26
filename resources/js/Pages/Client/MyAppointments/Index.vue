@@ -26,6 +26,7 @@
                                 <th scope="col" class="py-3 px-6">Dentist</th>
                                 <th scope="col" class="py-3 px-6">Schedule</th>
                                 <th scope="col" class="py-3 px-6">Status</th>
+                                <th scope="col" class="py-3 px-6">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,6 +72,16 @@
                                         }"
                                     >
                                         {{ appointment.status }}
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <div>
+                                        <!-- cancel -->
+                                        <button
+                                            class="bg-red-400 text-white px-2 rounded-lg"
+                                        >
+                                            Cancel
+                                        </button>
                                     </div>
                                 </td>
                             </tr>

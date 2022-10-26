@@ -1,9 +1,9 @@
 <template>
     <body
-        class="bg-slate-50 text-slate-900 text-sm dark:bg-slate-900 dark:text-slate-50 transition-all md:text-base"
+        class="bg-slate-50 min-h-screen text-slate-900 text-sm dark:bg-slate-900 dark:text-slate-50 transition-all md:text-base"
     >
         <main
-            class="w-screen h-screen p-[30px] grid place-items-center md:px-[15%] lg:px-[35%]"
+            class="w-screen overflow-y-auto h-screen p-[30px] grid place-items-center md:px-[15%] lg:px-[35%]"
         >
             <div
                 class="bg-slate-100 w-full p-2 pb-10 px-[30px] rounded-lg grid place-items-center border border-slate-200 dark:bg-slate-700 dark:border-slate-600 md:h-[90%]"
@@ -21,9 +21,7 @@
                             class="hidden dark:inline"
                         />
                     </div>
-                    <p class="mb-3 text-base text-center">
-                        Create new account
-                    </p>
+                    <p class="mb-3 text-base text-center">Create new account</p>
 
                     <form @submit.prevent="submit" class="w-full py-2 grid">
                         <input type="hidden" name="text" value="register" />
@@ -85,8 +83,7 @@
                         </button>
                     </form>
                     <div class="w-full mt-2 text-center">
-                        <a
-                            :href="route('auth.sign-in')"
+                        <a :href="route('auth.sign-in')"
                             >Return to sign in form</a
                         >
                     </div>

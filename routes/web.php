@@ -67,21 +67,24 @@ Route::middleware([
     });
 });
 
-Route::get('/auth/sign-in', function () {
-  return Inertia::render('Auth/SignIn');
-})->name('auth.sign-in');
 
-Route::get('/auth/sign-up', function () {
-  return Inertia::render('Auth/SignUp');
-})->name('auth.sign-up');
+Route::middleware(['guest'])->group(function () {
+  Route::get('/auth/sign-in', function () {
+    return Inertia::render('Auth/SignIn');
+  })->name('auth.sign-in');
+
+  Route::get('/auth/sign-up', function () {
+    return Inertia::render('Auth/SignUp');
+  })->name('auth.sign-up');
 
 
-Route::controller(AuthController::class)
-  ->prefix('auth/')
-  ->name('auth.')
-  ->group(function () {
-    Route::post('login', 'login')->name('login');
-    Route::post('register', 'login')->name('register');
-    Route::get('sign-in', 'signIn')->name('sign-in');
-    Route::post('register-client', 'registerClient')->name('register-client');
-  });
+  Route::controller(AuthController::class)
+    ->prefix('auth/')
+    ->name('auth.')
+    ->group(function () {
+      Route::post('login', 'login')->name('login');
+      Route::post('register', 'login')->name('register');
+      Route::get('sign-in', 'signIn')->name('sign-in');
+      Route::post('register-client', 'registerClient')->name('register-client');
+    });
+});

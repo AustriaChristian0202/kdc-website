@@ -62,17 +62,22 @@ class AppointmentController extends Controller
       'name' => 'required|string|max:255',
       'age' => 'required|integer',
       'sex' => 'required|in:male,female',
-      'date' => 'required|date',
+      // date is greater than today
+      'date' => 'required|date|after_or_equal:today',
       'service' => 'required',
       'dentist' => 'required|exists:users,id',
-      'contact' => 'required|string|max:255',
+      'contact' => 'required|integer|digits:11',
+      'time' => 'required|date_format:H:i|after_or_equal:09:00|before_or_equal:17:00',
     ]);
+
+    // combine date and time
+    $schedule = $request->date . ' ' . $request->time;
 
     $appointment = Appointment::create([
       'name' => $request->name,
       'age' => $request->age,
       'sex' => $request->date,
-      'schedule' => $request->date,
+      'schedule' => $schedule,
       'service' => $request->service,
       'dentist_id' => $request->dentist,
       'user_id' => auth()->user()->id,

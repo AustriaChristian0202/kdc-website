@@ -30,7 +30,8 @@ defineProps({
                     <div
                         v-if="$page.props.jetstream.canUpdateProfileInformation"
                     >
-                        <UpdateProfileInformationForm class="mt-6"
+                        <UpdateProfileInformationForm
+                            class="mt-6"
                             :user="$page.props.user"
                         />
 
@@ -42,8 +43,7 @@ defineProps({
 
                         <SectionBorder />
                     </div>
-
-                    <div
+                    <!-- <div
                         v-if="
                             $page.props.jetstream
                                 .canManageTwoFactorAuthentication
@@ -57,7 +57,7 @@ defineProps({
                         />
 
                         <SectionBorder />
-                    </div>
+                    </div> -->
 
                     <LogoutOtherBrowserSessionsForm
                         :sessions="sessions"
