@@ -19,6 +19,9 @@ const form = useForm({
     name: props.user.name,
     email: props.user.email,
     photo: null,
+    contact: props.user.contact,
+    sex: props.user.sex,
+    age: props.user.age,
 });
 
 const verificationLinkSent = ref(null);
@@ -192,8 +195,51 @@ const clearPhotoFileInput = () => {
                     </div>
                 </div>
             </div>
-        </template>
 
+            <!-- Contact -->
+            <div class="col-span-6 sm:col-span-4">
+                <InputLabel for="contact" value="Contact Number" class="" />
+                <TextInput
+                    id="contact"
+                    v-model="form.contact"
+                    type="text"
+                    class="mt-1 block w-full"
+                    autocomplete="name"
+                />
+                <InputError :message="form.errors.contact" class="mt-2" />
+            </div>
+
+            <!-- Contact -->
+            <div class="flex gap-2 col-span-6 sm:col-span-4">
+                <div class="w-full">
+                    <InputLabel value="Age" />
+                    <input
+                        type="number"
+                        name="age"
+                        placeholder="Age"
+                        required
+                        v-model="form.age"
+                        maxlength="11"
+                        class="bg-slate-50 w-full px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all appearance-none"
+                    />
+                    <InputError :message="form.errors.age" />
+                </div>
+                <div class="w-full">
+                    <InputLabel for="sex" value="Sex" class="" />
+                    <select
+                        name=""
+                        id=""
+                        v-model="form.sex"
+                        class="bg-slate-50 w-full px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all appearance-none"
+                    >
+                        <option value="">Sex</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    <InputError :message="form.errors.sex" class="mt-2" />
+                </div>
+            </div>
+        </template>
         <template #actions>
             <ActionMessage :on="form.recentlySuccessful" class="mr-3">
                 Saved.

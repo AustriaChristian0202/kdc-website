@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -71,5 +72,36 @@ class AuthController extends Controller
         ]
       ]
     );
+  }
+
+  public function redirectToGoogle()
+  {
+    return Socialite::driver('google')->redirect();
+  }
+
+  public function handleGoogleCallback()
+  {
+    $user = Socialite::driver('google')->user();
+
+    $existingUser = User::where('email', $user->email)->first();
+
+    if ($existingUser) {
+      auth()->login($existingUser, true);
+      if ($existingUser->role == 'admin') {
+        return redirect()->route('admin.home.index');
+      } else {
+        return redirect()->route('client.appointment.index');
+      }
+    } else {
+      $newUser = User::create([
+        'name' => $user->name,
+        'email' => $user->email,
+        'role' => 'client',
+      ]);
+
+      auth()->login($newUser, true);
+    }
+
+    return redirect()->route('client.appointment.index');
   }
 }

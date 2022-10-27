@@ -83,6 +83,11 @@ Route::middleware(['guest'])->group(function () {
     return Inertia::render('Auth/SignUp');
   })->name('auth.sign-up');
 
+  // google login
+
+  Route::get('social/google', [AuthController::class, 'redirectToGoogle'])->name('auth.google');
+  Route::get('social/google/callback', [AuthController::class, 'handleGoogleCallback']);
+
 
   Route::controller(AuthController::class)
     ->prefix('auth/')
