@@ -106,7 +106,7 @@
                             </tr>
                             <tr v-else>
                                 <td
-                                    colspan="5"
+                                    colspan="6"
                                     class="py-4 px-6 text-center text-gray-500"
                                 >
                                     No appointments found

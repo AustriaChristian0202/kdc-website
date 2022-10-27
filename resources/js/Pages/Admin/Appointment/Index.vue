@@ -11,9 +11,11 @@
             ></div>
 
             <div class="absolute max-w-lg">
-                <div class="container bg-white overflow-hidden md:rounded">
+                <div
+                    class="container dark:bg-slate-700 bg-white overflow-hidden md:rounded"
+                >
                     <div
-                        class="px-4 py-4 gap-4 leading-none flex justify-between items-center font-medium text-sm bg-gray-100 border-b select-none"
+                        class="px-4 py-4 gap-4 leading-none flex justify-between items-center font-medium text-sm dark:bg-slate-800 border-gray-500 bg-gray-100 border-b select-none"
                     >
                         <h3>Create New Appointment</h3>
                         <div
@@ -211,6 +213,7 @@
                             <tr>
                                 <th scope="col" class="py-3 px-6">ID</th>
                                 <th scope="col" class="py-3 px-6">Name</th>
+                                <th scope="col" class="py-3 px-6">Contact</th>
                                 <th scope="col" class="py-3 px-6">Age</th>
                                 <th scope="col" class="py-3 px-6">Service</th>
                                 <th scope="col" class="py-3 px-6">Dentist</th>
@@ -236,6 +239,7 @@
                                 >
                                     {{ item.name }}
                                 </th>
+                                <td class="py-4 px-6">{{ item.contact }}</td>
                                 <td class="py-4 px-6">{{ item.age }}</td>
                                 <td class="py-4 px-6">{{ item.service }}</td>
                                 <td class="py-4 px-6">
@@ -245,13 +249,13 @@
                                     <!-- convert to date time using moment js-->
                                     {{
                                         moment(item.schedule).format(
-                                            "MMMM Do YYYY, h:mm:ss a"
+                                            "MMMM DD,YYYY, h:mm a"
                                         )
                                     }}
                                 </td>
                                 <td class="py-4 px-6">
                                     <div
-                                        class="flex items-center first-letter:uppercase justify-center font-bold rounded-xl"
+                                        class="flex items-center px-2 first-letter:uppercase justify-center font-bold rounded-xl"
                                         :class="{
                                             'bg-green-200 text-green-700':
                                                 item.status === 'approved',

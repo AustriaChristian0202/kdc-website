@@ -17,7 +17,7 @@
                     <div
                         class="bg-orange-300 w-1/2 p-3 rounded-lg flex items-center justify-between border border-orange-400 hover:shadow-lg dark:bg-orange-200 dark:text-slate-900 dark:border-orange-300 transition-all"
                     >
-                        <p class="font-bold">Remaining <br />appointments</p>
+                        <p class="font-bold">Pending <br />appointments</p>
                         <p class="text-7xl font-bold font-mono">
                             {{ props.remainingAppointments }}
                         </p>

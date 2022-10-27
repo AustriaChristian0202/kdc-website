@@ -1,5 +1,6 @@
 <template>
     <ClientLayout>
+        <head title="Create Appointment" />
         <main
             class="bg-slate-50 w-full p-3 pt-[80px] lg:flex flex-col items-center dark:bg-slate-900"
         >
@@ -328,6 +329,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import Modal from "@/Components/Modal.vue";
 import axios from "axios";
+import { Head } from "@inertiajs/inertia-vue3";
 
 defineProps({
     dentists: {

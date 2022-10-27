@@ -45,21 +45,31 @@ class AuthController extends Controller
     $request->validate([
       'name' => 'required',
       'email' => 'required|email|unique:users',
-      'password' => 'required',
-      'password_confirmation' => 'required|same:password',
-      'phone' => 'required',
+      'password' => 'required|min:6|confirmed',
+      'contact' => 'required|numeric|digits:11',
+      'sex' => 'required|in:male,female',
+      'age' => 'required|integer',
     ]);
 
     $user = User::create([
       'name' => $request->name,
       'email' => $request->email,
       'password' => Hash::make($request->password),
-      'phone' => $request->phone,
+      'contact' => $request->contact,
+      'sex' => $request->sex,
+      'age' => $request->age,
       'role' => 'client',
     ]);
 
 
 
-    return redirect()->route('auth.sign-in');
+    return redirect()->route('auth.sign-in')->with(
+      [
+        'message' => [
+          'type' => 'success',
+          'content' => 'Account created successfully'
+        ]
+      ]
+    );
   }
 }

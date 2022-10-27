@@ -23,6 +23,9 @@ class ClientSeeder extends Seeder
         [
           'name' => fake()->name(),
           'email' => fake()->safeEmail(),
+          'contact' => fake()->phoneNumber(),
+          'sex' => fake()->randomElement(['male', 'female']),
+          'age' => fake()->randomNumber(2),
           'email_verified_at' => now(),
           'password' => Hash::make('password'),
         ]

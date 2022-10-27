@@ -2,6 +2,7 @@
     <body
         class="bg-slate-50 text-slate-900 text-sm dark:bg-slate-900 dark:text-slate-50 transition-all md:text-base"
     >
+        <Head title="Sign In" />
         <main
             class="w-screen h-screen p-[30px] grid place-items-center md:px-[15%] lg:px-[35%]"
         >
@@ -109,6 +110,7 @@
 import { useForm } from "@inertiajs/inertia-vue3";
 import InputError from "@/Components/InputError.vue";
 import { Link } from "@inertiajs/inertia-vue3";
+import { Head } from "@inertiajs/inertia-vue3";
 
 const form = useForm({
     email: "",

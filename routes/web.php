@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Appointment;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Client\AppointmentController;
@@ -61,6 +62,10 @@ Route::middleware([
           Route::get('appointments-by-date/{date?}', 'appointmentsByDate')->name('by-date');
           Route::post('create', 'store')->name('store');
         });
+
+
+      Route::resource('client', ClientController::class);
+
 
       Route::get('profile', function () {
         return Inertia::render('Profile/AdminProfile');

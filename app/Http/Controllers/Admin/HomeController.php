@@ -19,7 +19,7 @@ class HomeController extends Controller
     ));
     // get all todays appointment
     $todaysAppointment = $today->count();
-    $remainingAppointments = $today->where('status', 'pending')->count();
+    $remainingAppointments = Appointment::where('status', 'pending')->count();
     // date time is greater than today include time
     $upcomingAppointments =
       $today->whereTime('schedule', '>', today()->format(
