@@ -8,10 +8,10 @@
         />
 
         <header
-            class="bg-slate-400 w-full h-[60px] grid place-items-center fixed top-0 left-0 z-20 dark:bg-slate-500 dark:border-slate-300"
+            class="bg-slate-400 w-full h-[60px] grid place-items-center fixed top-0 left-0 z-20 dark:bg-slate-700 dark:border-slate-300"
         >
             <nav
-                class="bg-slate-400 w-full h-[40px] flex items-center justify-between dark:bg-slate-500"
+                class="bg-slate-400 w-full h-[40px] flex items-center justify-between dark:bg-slate-700"
             >
                 <div class="h-full ml-[15px] flex gap-1">
                     <button
@@ -53,26 +53,39 @@
                 </div>
 
                 <ul class="hidden lg:flex gap-2">
-                    <Link :href="route('client.my-appointments')">
-                        <a
-                            href=""
-                            class="w-full px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
+                    <li>
+                        <Link
+                            :href="route('client.my-appointments')"
+                            :class="{
+                                'font-bold border-1 border-b border-white rounded-none dark:border-gray-300':
+                                    route().current('client.my-appointments'),
+                            }"
+                            class="w-full px-3 py-2 rounded-lg flex text-white hover:text-gray-700 items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
                         >
                             My Appointments
-                        </a>
-                    </Link>
-                    <Link :href="route('client.appointment.index')">
-                        <a
-                            href=""
-                            class="w-full px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            :href="route('client.appointment.index')"
+                            :class="{
+                                'font-bold border-1 border-b border-white rounded-none dark:border-gray-300':
+                                    route().current('client.appointment.*'),
+                            }"
+                            class="w-full px-3 py-2 rounded-lg flex text-white hover:text-gray-700 items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
                         >
                             Make an Appointment
-                        </a>
-                    </Link>
+                        </Link>
+                    </li>
+
                     <li>
                         <Link
                             :href="route('profile.show')"
-                            class="w-full px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
+                            :class="{
+                                'font-bold border-1 border-b border-white rounded-none dark:border-gray-300':
+                                    route().current('profile.*'),
+                            }"
+                            class="w-full px-3 py-2 rounded-lg flex text-white hover:text-gray-700 items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
                         >
                             Profile
                         </Link>
@@ -163,58 +176,97 @@
                             class="w-full p-5 text-slate-900 dark:text-slate-50"
                         >
                             <li class="w-full">
-                                <a
-                                    href=""
+                                <Link
+                                    :href="route('client.appointment.index')"
+                                    :class="{
+                                        'font-bold border-1 border-b border-white rounded-none dark:border-gray-300':
+                                            route().current(
+                                                'client.appointment.*'
+                                            ),
+                                    }"
                                     class="w-full mb-2 px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
                                     id="sidebar-service"
                                 >
-                                    <span
-                                        class="w-6 h-6 mr-5 inline dark:hidden"
-                                    >
-                                        <img
-                                            src="/resources/appointment-light-mode.png"
-                                            alt="home-icon"
+                                    <span class="w-6 h-6 mr-5 inline">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.5"
+                                            stroke="currentColor"
                                             class="w-6 h-6"
-                                        />
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
+                                            />
+                                        </svg>
                                     </span>
-                                    <span
-                                        class="w-6 h-6 mr-5 hidden dark:inline"
-                                    >
-                                        <img
-                                            src="/resources/appointment-dark-mode.png"
-                                            alt="home-icon"
-                                            class="w-6 h-6"
-                                        />
-                                    </span>
-                                    Appointment
-                                </a>
+                                    Make An Appointment
+                                </Link>
                             </li>
                             <li class="w-full">
-                                <a
-                                    href=""
+                                <Link
+                                    :href="route('client.my-appointments')"
+                                    :class="{
+                                        'font-bold border-1 border-b border-white rounded-none dark:border-gray-300':
+                                            route().current(
+                                                'client.my-appointments'
+                                            ),
+                                    }"
                                     class="w-full mb-2 px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
-                                    id="sidebar-about"
+                                    id="sidebar-service"
                                 >
-                                    <span
-                                        class="w-6 h-6 mr-5 inline dark:hidden"
-                                    >
-                                        <img
-                                            src="/resources/user-light-mode.png"
-                                            alt="home-icon"
+                                    <span class="w-6 h-6 mr-5 inline">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.5"
+                                            stroke="currentColor"
                                             class="w-6 h-6"
-                                        />
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"
+                                            />
+                                        </svg>
                                     </span>
-                                    <span
-                                        class="w-6 h-6 mr-5 hidden dark:inline"
-                                    >
-                                        <img
-                                            src="/resources/user-dark-mode.png"
-                                            alt="home-icon"
+
+                                    My Appointments
+                                </Link>
+                            </li>
+                            <li class="w-full">
+                                <Link
+                                    :href="route('profile.show')"
+                                    :class="{
+                                        'font-bold border-1 border-b border-white rounded-none dark:border-gray-300':
+                                            route().current('profile.*'),
+                                    }"
+                                    class="w-full mb-2 px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
+                                    id="sidebar-service"
+                                >
+                                    <span class="w-6 h-6 mr-5 inline">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.5"
+                                            stroke="currentColor"
                                             class="w-6 h-6"
-                                        />
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                                            />
+                                        </svg>
                                     </span>
+
                                     Profile
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>

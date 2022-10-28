@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Appointment;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Client\AppointmentController;
 use Illuminate\Foundation\Application;
@@ -65,6 +66,14 @@ Route::middleware([
 
 
       Route::resource('client', ClientController::class);
+
+      Route::controller(ReportController::class)
+        ->name('report.')
+        ->prefix('report')
+        ->group(function () {
+          Route::get('appointment', 'appointment')->name('appointment.index');
+          Route::get('appointment/export', 'appointmentExport')->name('appointment.export');
+        });
 
 
       Route::get('profile', function () {
