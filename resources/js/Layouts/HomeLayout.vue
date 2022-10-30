@@ -17,27 +17,27 @@
                         <img
                             src="/resources/kebab-light-mode.png"
                             alt=""
-                            class="h-2/3 inline dark:hidden lg:hidden"
+                            class="h-2/3 hidden dark:inline lg:hidden"
                         />
                         <img
                             src="/resources/kebab-dark-mode.png"
                             alt=""
-                            class="h-2/3 hidden dark:inline lg:hidden"
+                            class="h-2/3 inline dark:hidden lg:hidden"
                         />
                     </button>
                     <a
-                        href="#home"
+                        href="/"
                         class="h-full flex items-center gap-1 text-base font-bold uppercase"
                     >
                         <img
                             src="/resources/logo-large.png"
                             alt="logo"
-                            class="h-full inline dark:hidden"
+                            class="h-full hidden dark:inline"
                         />
                         <img
                             src="/resources/logo-large-dark-mode.png"
                             alt="logo"
-                            class="h-full hidden dark:inline"
+                            class="h-full inline dark:hidden"
                         />
                         <p
                             class="text-slate-50 hidden dark:text-slate-900 lg:inline"
@@ -47,11 +47,11 @@
                     </a>
                 </div>
 
-                <ul class="hidden lg:flex gap-2">
+                <ul class="hidden lg:flex gap-2 font-semibold text-gray-50">
                     <li>
                         <a
                             href="#home"
-                            class="w-full px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
+                            class="w-full px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-500 dark:hover:bg-slate-900 transition-all"
                         >
                             Home
                         </a>
@@ -59,7 +59,7 @@
                     <li>
                         <a
                             href="#service"
-                            class="w-full px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
+                            class="w-full px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-500 dark:hover:bg-slate-900 transition-all"
                         >
                             Service
                         </a>
@@ -67,7 +67,7 @@
                     <li>
                         <a
                             href="#about"
-                            class="w-full px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
+                            class="w-full px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-500 dark:hover:bg-slate-900 transition-all"
                         >
                             About
                         </a>
@@ -75,7 +75,7 @@
                     <li>
                         <a
                             href="#contact"
-                            class="w-full px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
+                            class="w-full px-3 py-2 rounded-lg flex items-center text-base hover:bg-slate-500 dark:hover:bg-slate-900 transition-all"
                         >
                             Contact
                         </a>

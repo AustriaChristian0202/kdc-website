@@ -30,7 +30,7 @@
                         />
                     </button>
                     <a
-                        href=""
+                        href="/"
                         class="h-full flex items-center gap-1 text-base font-bold uppercase"
                     >
                         <img

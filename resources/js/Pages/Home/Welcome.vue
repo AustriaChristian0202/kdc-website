@@ -9,12 +9,14 @@ import HomeLayout from "../../Layouts/HomeLayout.vue";
 import RServices from "./RServices.vue";
 import Dentist from "./Dentist.vue";
 import Footer from "./Footer.vue";
+import Contacts from "./Contacts.vue";
 
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
     laravelVersion: String,
     phpVersion: String,
+    user: Object,
 });
 </script>
 
@@ -40,16 +42,24 @@ defineProps({
                         >
                             Kasilag Dental Clinic
                         </p>
-                        <p class="text-slate-200 italic md:text-lg lg:text-2xl">
+                        <p
+                            class="mb-2 text-slate-200 italic md:text-lg lg:text-2xl"
+                        >
                             Renew your smile
                         </p>
-                        <a href="">
-                            <button
-                                class="bg-blue-500 text-slate-50 text-base font-medium mt-4 px-5 py-3 rounded-lg dark:bg-blue-400 dark:text-slate-900 outline outline-1 outline-blue-300 hover:shadow-2xl dark:hover:outline-blue-400 dark:hover:bg-blue-500 transition-all"
-                            >
-                                Create an appointment
-                            </button>
-                        </a>
+
+                        <Link
+                            :href="
+                                user
+                                    ? user?.role !== 'admin'
+                                        ? route('client.appointment.index')
+                                        : route('admin.appointment.create')
+                                    : route('auth.sign-in')
+                            "
+                            class="border-white border-2 rounded-lg px-3 py-2 text-white hover:bg-blue-700 hover:text-slate-50 transition-all"
+                        >
+                            Create an appointment
+                        </Link>
                     </div>
                 </section>
 
@@ -57,7 +67,7 @@ defineProps({
                     <RServices />
                     <Dentist />
                     <About />
-                    <Contact />
+                    <Contacts />
                 </div>
             </main>
             <Footer />

@@ -16,22 +16,19 @@
                 <p
                     class="bg-slate-300 text-slate-600 mb-3 mt-1 p-2 rounded-lg text-xs dark:bg-slate-600 dark:text-slate-300 md:text-sm"
                 >
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Tempora, aut!
+                    Magallanes St. Paniqui, Tarlac
                 </p>
                 <p class="font-medium">Contact number:</p>
                 <p
                     class="bg-slate-300 text-slate-600 mb-3 mt-1 p-2 rounded-lg text-xs dark:bg-slate-600 dark:text-slate-300 md:text-sm"
                 >
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Tempora, aut!
+                    09510184898
                 </p>
                 <p class="font-medium">Email:</p>
                 <p
                     class="bg-slate-300 text-slate-600 mb-3 mt-1 p-2 rounded-lg text-xs dark:bg-slate-600 dark:text-slate-300 md:text-sm"
                 >
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Tempora, aut!
+                    kasilagdentalclinic@gmail.com
                 </p>
                 <p class="font-medium">Working hours:</p>
                 <p
