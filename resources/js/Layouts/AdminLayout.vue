@@ -21,12 +21,12 @@
                         <img
                             src="/resources/kebab-light-mode.png"
                             alt=""
-                            class="h-2/3 inline dark:hidden lg:hidden"
+                            class="h-2/3 inline dark:inline lg:hidden"
                         />
                         <img
                             src="/resources/kebab-dark-mode.png"
                             alt=""
-                            class="h-2/3 hidden dark:inline lg:hidden"
+                            class="h-2/3 hidden dark:hidden lg:hidden"
                         />
                     </button>
                     <a
@@ -36,15 +36,15 @@
                         <img
                             src="/resources/logo-large.png"
                             alt="logo"
-                            class="h-full inline dark:hidden"
+                            class="h-full hidden dark:inline"
                         />
                         <img
                             src="/resources/logo-large-dark-mode.png"
                             alt="logo"
-                            class="h-full hidden dark:inline"
+                            class="h-full inline dark:hidden"
                         />
                         <p
-                            class="text-slate-50 hidden dark:text-slate-900 lg:inline"
+                            class="text-slate-50 hidden dark:text-slate-200 lg:inline"
                         >
                             Kasilag Dental Clinic
                         </p>
@@ -283,6 +283,37 @@
                                     </svg>
 
                                     Patients
+                                </Link>
+                            </li>
+                            <li class="w-full">
+                                <Link
+                                    :href="
+                                        route('admin.report.appointment.index')
+                                    "
+                                    :class="{
+                                        'font-bold border-1 border-b border-white rounded-none dark:border-gray-300':
+                                            route().current('admin.report.*'),
+                                    }"
+                                    class="w-full flex gap-5 mb-2 px-3 py-2 rounded-lg items-center text-base hover:bg-slate-50 dark:hover:bg-slate-900 transition-all"
+                                    id="sidebar-about"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        class="w-6 h-6"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625zM7.5 15a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 017.5 15zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H8.25z"
+                                            clip-rule="evenodd"
+                                        />
+                                        <path
+                                            d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z"
+                                        />
+                                    </svg>
+
+                                    Reports
                                 </Link>
                             </li>
                             <li class="w-full">

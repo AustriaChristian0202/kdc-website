@@ -6,6 +6,9 @@ import Sidebar from "./Sidebar.vue";
 import About from "./About.vue";
 import Contact from "./Contact.vue";
 import HomeLayout from "../../Layouts/HomeLayout.vue";
+import RServices from "./RServices.vue";
+import Dentist from "./Dentist.vue";
+import Footer from "./Footer.vue";
 
 defineProps({
     canLogin: Boolean,
@@ -51,11 +54,13 @@ defineProps({
                 </section>
 
                 <div class="backdrop-blur-sm">
-                    <Services />
+                    <RServices />
+                    <Dentist />
                     <About />
                     <Contact />
                 </div>
             </main>
+            <Footer />
         </div>
     </HomeLayout>
 </template>

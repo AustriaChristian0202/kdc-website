@@ -65,27 +65,32 @@
                                                 'approved',
                                             'bg-red-200 text-red-700':
                                                 appointment.status ===
-                                                'rejected',
+                                                    'rejected' ||
+                                                appointment.status ===
+                                                    'cancelled',
                                             'bg-yellow-200 text-yellow-700 ':
                                                 appointment.status ===
-                                                'pending',
+                                                    'pending' ||
+                                                appointment.status ===
+                                                    'rescheduled',
                                         }"
                                     >
                                         {{ appointment.status }}
                                     </div>
                                 </td>
                                 <td class="py-4 px-6">
-                                    <div>
+                                    <div
+                                        class="flex gap-2"
+                                        v-if="
+                                            appointment.cancellable &&
+                                            appointment.status !==
+                                                'cancelled' &&
+                                            appointment.status !== 'rejected'
+                                        "
+                                    >
                                         <!-- cancel -->
                                         <!-- if schedule is today cannot cancel schedule-->
                                         <button
-                                            v-if="
-                                                appointment.status ===
-                                                    'pending' &&
-                                                moment(
-                                                    appointment.schedule
-                                                ).isAfter(moment())
-                                            "
                                             @click="
                                                 showCancelAppointment(
                                                     appointment.id
@@ -95,11 +100,33 @@
                                         >
                                             Cancel
                                         </button>
+                                        <Link
+                                            :href="
+                                                route(
+                                                    'client.reschedule-form',
+                                                    {
+                                                        appointment_id:
+                                                            appointment.id,
+                                                    }
+                                                )
+                                            "
+                                            class="bg-green-500 text-white rounded-lg px-2 py-1"
+                                        >
+                                            Re-sched
+                                        </Link>
+                                    </div>
+                                    <div class="flex gap-2 items-center" v-else>
                                         <button
-                                            v-else
-                                            class="bg-red-100 text-white rounded-lg px-2 py-1"
+                                            disabled
+                                            class="bg-red-100 text-white rounded-lg px-2 py-1 dark:bg-red-900 dark:text-red-700"
                                         >
                                             Cancel
+                                        </button>
+                                        <button
+                                            disabled
+                                            class="dark:bg-green-900 dark:text-green-700 bg-green-100 text-white rounded-lg px-2 py-1"
+                                        >
+                                            Re-sched
                                         </button>
                                     </div>
                                 </td>
@@ -119,7 +146,9 @@
         </div>
         <Modal :show="isCancelShow">
             <div class="p-4">
-                <div class="flex justify-between">
+                <div
+                    class="flex justify-between text-gray-700 dark:text-gray-300"
+                >
                     <div class="flex gap-1 items-center">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -156,7 +185,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="my-2">
+                <div class="my-2 dark:text-gray-400 text-gray-700">
                     <p>
                         This action is not reversible.Are you sure you want to
                         cancel this appointment?
@@ -189,6 +218,7 @@ import Modal from "@/Components/Modal.vue";
 import moment from "moment";
 import { ref } from "vue";
 import { Inertia } from "@inertiajs/inertia";
+import { Link } from "@inertiajs/inertia-vue3";
 defineProps({
     appointments: {
         type: Array,

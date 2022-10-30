@@ -2,7 +2,7 @@
     <AdminLayout>
         <Head title="Clients" />
         <div class="w-full max-w-7xl mx-auto mt-20">
-            <div>
+            <div class="mx-4 sm:mx-0">
                 <h1
                     class="font-bold mb-2 text-lg dark:text-gray-300 text-gray-700"
                 >
@@ -114,7 +114,7 @@
             <Pagination :links="links" />
         </div>
         <Modal :show="isModalWarning">
-            <div class="p-4">
+            <div class="p-4 dark:text-gray-300">
                 <div class="flex justify-between">
                     <div class="flex gap-1 items-center">
                         <svg

@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div
-                class="flex mt-4 flex-wrap items-center gap-2 pb-4 p-4 bg-white dark:bg-gray-900"
+                class="flex mt-4 justify-center flex-wrap items-center gap-2 pb-4 p-4 bg-white dark:bg-gray-900"
             >
                 <div>
                     <label for="table-search" class="sr-only">Search</label>
@@ -68,6 +68,8 @@
                         <option value="pending">Pending</option>
                         <option value="approved">Approved</option>
                         <option value="rejected">Rejected</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="rescheduled">Rescheduled</option>
                     </select>
                 </div>
                 <div>
@@ -265,9 +267,12 @@
                                         'bg-green-200 text-green-700':
                                             appointment.status === 'approved',
                                         'bg-red-200 text-red-700':
-                                            appointment.status === 'rejected',
+                                            appointment.status === 'rejected' ||
+                                            appointment.status === 'cancelled',
                                         'bg-yellow-100 text-yellow-700 ':
-                                            appointment.status === 'pending',
+                                            appointment.status === 'pending' ||
+                                            appointment.status ===
+                                                'rescheduled',
                                     }"
                                 >
                                     {{ appointment.status }}
@@ -277,7 +282,7 @@
                         <tr v-else>
                             <td
                                 colspan="9"
-                                class="text-center py-8 px-6 font-bold text-base text-gray-900 whitespace-nowrap dark:text-white"
+                                class="text-center py-8 px-6 text-sm text-gray-900 whitespace-nowrap dark:text-white"
                             >
                                 <div
                                     class="flex gap-2 items-center justify-center w-full"

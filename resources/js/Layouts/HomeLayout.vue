@@ -256,16 +256,6 @@
                         </li>
                     </ul>
                 </div>
-                <div class="w-full px-10">
-                    <a href="" class="w-full mr-[30px]"> </a>
-                    <form @submit.prevent="logout">
-                        <button
-                            class="bg-slate-50 text-slate-900 w-full px-3 py-2 rounded-lg font-medium outline outline-1 outline-slate-100 hover:bg-slate-300 hover:outline-slate-400 dark:bg-slate-900 dark:text-slate-50 dark:outline-slate-600 dark:hover:bg-slate-600 dark:hover:text-slate-400 dark:hover:outline-slate-500 transition-all uppercase"
-                        >
-                            Log out
-                        </button>
-                    </form>
-                </div>
             </div>
             <div @click="toggleSidebar" class="w-[20%] h-screen"></div>
         </div>

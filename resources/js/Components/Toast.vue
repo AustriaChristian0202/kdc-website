@@ -6,6 +6,7 @@
             role="alert"
         >
             <div
+                v-if="message?.type === 'success'"
                 class="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200"
             >
                 <svg
@@ -23,6 +24,28 @@
                 </svg>
                 <span class="sr-only">Check icon</span>
             </div>
+            <div
+                v-if="message?.type === 'error'"
+                class="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
+
+                <span class="sr-only">Check icon</span>
+            </div>
+
             <div class="ml-3 text-sm font-normal">{{ message?.content }}</div>
             <button
                 type="button"

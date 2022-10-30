@@ -34,7 +34,9 @@ return new class extends Migration
       $table->dateTime('schedule');
       $table->unsignedBigInteger('dentist_id');
       $table->enum('sex', ['male', 'female']);
-      $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+      $table->enum('status', [
+        'pending', 'approved', 'rejected', 'cancelled', 'rescheduled'
+      ])->default('pending');
       $table->timestamps();
     });
   }

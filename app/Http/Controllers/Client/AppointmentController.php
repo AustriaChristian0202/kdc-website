@@ -57,7 +57,6 @@ class AppointmentController extends Controller
    */
   public function store(Request $request)
   {
-
     //
     $request->validate([
       'name' => 'required|string|max:255',
@@ -77,7 +76,7 @@ class AppointmentController extends Controller
     $appointment = Appointment::create([
       'name' => $request->name,
       'age' => $request->age,
-      'sex' => $request->date,
+      'sex' => $request->sex,
       'schedule' => $schedule,
       'service' => $request->service,
       'dentist_id' => $request->dentist,
@@ -141,27 +140,35 @@ class AppointmentController extends Controller
   {
     // cancel appointment
     $appointment = Appointment::find($id);
-    // check if is today is 1 day after appointment
-    if (today()->diffInDays($appointment->schedule) > 1) {
-      $appointment->delete();
-      return redirect()->back()->with(
-        [
-          'message' => [
-            'type' => 'success',
-            'content' => 'Appointment cancelled successfully'
-          ],
-        ]
-      );
-    } else {
+
+    // remove time in sched
+    $sched = Carbon::parse($appointment->schedule)->format('Y-m-d');
+    $today = Carbon::today()->format('Y-m-d');
+
+    // if sched is today or tomorrow cannot be cancelled
+    if ($sched == $today || $sched == Carbon::tomorrow()->format('Y-m-d')) {
       return redirect()->back()->with(
         [
           'message' => [
             'type' => 'error',
-            'content' => 'You can only cancel appointment 1 day before'
+            'content' => 'You cannot cancel appointment today or tomorrow'
           ],
         ]
       );
     }
+
+
+    $appointment->status = 'cancelled';
+    $appointment->save();
+
+    return redirect()->back()->with(
+      [
+        'message' => [
+          'type' => 'success',
+          'content' => 'Appointment cancelled successfully'
+        ],
+      ]
+    );
   }
 
   public function myAppointments()
@@ -169,7 +176,20 @@ class AppointmentController extends Controller
     $appointments = Appointment::where('user_id', auth()->user()->id)
       ->with('dentist')
       ->latest()
-      ->get();
+      ->get()
+      // map to check date if today or tomorrow if true add cancellable to true
+      ->map(function ($appointment) {
+        $sched = Carbon::parse($appointment->schedule)->format('Y-m-d');
+        $today = Carbon::today()->format('Y-m-d');
+
+        if ($sched == $today || $sched == Carbon::tomorrow()->format('Y-m-d')) {
+          $appointment->cancellable = false;
+        } else {
+          $appointment->cancellable = true;
+        }
+
+        return $appointment;
+      });
 
     return Inertia::render('Client/MyAppointments/Index', [
       'appointments' => $appointments,
@@ -187,5 +207,62 @@ class AppointmentController extends Controller
 
 
     return response()->json($appointment);
+  }
+
+  public function rescheduleForm($appointment_id)
+  {
+    $appointment = Appointment::find($appointment_id);
+
+    $dentists = User::where('role', 'admin')->get([
+      'name', 'id'
+    ]);
+
+    return Inertia::render('Client/MyAppointments/Reschedule', [
+      'appointment' => $appointment,
+      'dentists' => $dentists,
+
+    ]);
+  }
+
+  public function reschedule($appointment_id, Request $request)
+  {
+    //
+    $request->validate([
+      'name' => 'required|string|max:255',
+      'age' => 'required|integer',
+      'sex' => 'required|in:male,female',
+      // date is greater than today
+      'date' => 'required|date|after_or_equal:today',
+      'service' => 'required',
+      'dentist' => 'required|exists:users,id',
+      'contact' => 'required|integer|digits:11',
+      'time' => 'required|date_format:H:i|after_or_equal:09:00|before_or_equal:17:00',
+    ]);
+
+    // combine date and time
+    $schedule = $request->date . ' ' . $request->time;
+
+    $appointment = Appointment::find($appointment_id);
+
+    $appointment->name = $request->name;
+    $appointment->age = $request->age;
+    $appointment->sex = $request->sex;
+    $appointment->schedule = $schedule;
+    $appointment->service = $request->service;
+    $appointment->dentist_id = $request->dentist;
+    $appointment->contact = $request->contact;
+    $appointment->status = 'rescheduled';
+
+    $appointment->save();
+
+
+    return redirect()->route('client.my-appointments')->with(
+      [
+        'message' => [
+          'type' => 'success',
+          'content' => 'Appointment rescheduled successfully'
+        ],
+      ]
+    );
   }
 }

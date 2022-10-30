@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Client\AppointmentController;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -47,6 +48,8 @@ Route::middleware([
       Route::resource('appointment', AppointmentController::class);
       Route::get('appointment-selected-date/{date}', [AppointmentController::class, 'getSelectedDateAppointment'])->name('appointment-selected-date');
       Route::get('my-appointments', [AppointmentController::class, 'myAppointments'])->name('my-appointments');
+      Route::get('reschedule-appointment/{appointment_id}', [AppointmentController::class, 'rescheduleForm'])->name('reschedule-form');
+      Route::post('reschedule-appointment/{appointment_id}', [AppointmentController::class, 'reschedule'])->name('reschedule');
     });
 
   Route::prefix('admin')
@@ -61,10 +64,22 @@ Route::middleware([
           Route::get('', 'index')->name('index');
           Route::post('status-change', 'statusChange')->name('status-change');
           Route::get('appointments-by-date/{date?}', 'appointmentsByDate')->name('by-date');
-          Route::post('create', 'store')->name('store');
+          Route::post('store', 'store')->name('store');
+          Route::get('create', 'create')->name('create');
+          Route::get('reschedule/{appointment_id}', 'rescheduleForm')->name('reschedule-form');
+          Route::post('reschedule/{appointment_id}', 'reschedule')->name('reschedule');
         });
 
+      Route::get('force-send-email', function () {
+        Artisan::call('daily-client:schedule-reminder');
 
+        return redirect()->back()->with([
+          'message' => [
+            'type' => 'success',
+            'content' => 'Email sent'
+          ]
+        ]);
+      })->name('force-send-email');
       Route::resource('client', ClientController::class);
 
       Route::controller(ReportController::class)
@@ -74,6 +89,7 @@ Route::middleware([
           Route::get('appointment', 'appointment')->name('appointment.index');
           Route::get('appointment/export', 'appointmentExport')->name('appointment.export');
         });
+
 
 
       Route::get('profile', function () {

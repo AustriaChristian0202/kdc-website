@@ -34,14 +34,16 @@ class DailyClientScheduleReminder extends Command
   {
     // get all the appointments for tomorrow
     $appointments = Appointment::whereDate('schedule', Carbon::tomorrow())
+      // where status is approved or rescheduled or pending
+      ->whereIn('status', ['approved', 'rescheduled', 'pending'])
       ->with(['client', 'dentist'])
       ->get();
 
     // get all the clients email and schedule
     $clients = $appointments->map(function ($appointment) {
       return [
-        'email' => $appointment->client->email,
-        'name' => $appointment->client->name,
+        'email' => $appointment->client?->email,
+        'name' => $appointment->client?->name,
         'dentist' => $appointment->dentist->name,
         'service' => $appointment->service,
         'schedule' => Carbon::parse($appointment->schedule)->format('F d, Y h:i A'),
@@ -51,12 +53,14 @@ class DailyClientScheduleReminder extends Command
 
     // send email to all the clients with their schedule with default template
     foreach ($clients as $client) {
-      // send email to client
-      Mail::to($client['email'])->send(
-        new DailyScheduleReminderMail($client)
-      );
+      if ($client['email']  !== null) {
+        // send email to client
+        Mail::to($client['email'])->send(
+          new DailyScheduleReminderMail($client)
+        );
 
-      $this->info('Successfully sent email to ' . $client['email']);
+        $this->info('Successfully sent email to ' . $client['email']);
+      }
     }
 
     return Command::SUCCESS;
