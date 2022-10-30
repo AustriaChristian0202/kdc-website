@@ -32,11 +32,13 @@
                     />
                     <InputError :message="form.errors.age" />
                     <input
-                        type="number"
+                        type="text"
                         name="contact"
+                        @keypress="numbersOnly"
                         placeholder="Contact Number"
                         v-model="form.contact"
                         required
+                        maxlength="11"
                         class="bg-slate-50 w-full mb-2 px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all"
                     />
                     <InputError :message="form.errors.contact" />
@@ -379,6 +381,15 @@ const times = reactive([
 
 const selectTime = (selectedTime) => {
     form.time = selectedTime;
+};
+const numbersOnly = (evt) => {
+    evt = evt ? evt : window.event;
+    var charCode = evt.which ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46) {
+        evt.preventDefault();
+    } else {
+        return true;
+    }
 };
 </script>
 

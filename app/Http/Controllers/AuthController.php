@@ -47,7 +47,7 @@ class AuthController extends Controller
       'name' => 'required',
       'email' => 'required|email|unique:users',
       'password' => 'required|min:6|confirmed',
-      'contact' => 'required|numeric|digits:11',
+      'contact' => 'required|string|digits:11',
       'sex' => 'required|in:male,female',
       'age' => 'required|integer',
     ]);

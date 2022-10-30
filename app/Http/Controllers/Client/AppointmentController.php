@@ -66,7 +66,7 @@ class AppointmentController extends Controller
       'date' => 'required|date|after_or_equal:today',
       'service' => 'required',
       'dentist' => 'required|exists:users,id',
-      'contact' => 'required|integer|digits:11',
+      'contact' => 'required|digits:11',
       'time' => 'required|date_format:H:i|after_or_equal:09:00|before_or_equal:17:00',
     ]);
 
@@ -235,7 +235,7 @@ class AppointmentController extends Controller
       'date' => 'required|date|after_or_equal:today',
       'service' => 'required',
       'dentist' => 'required|exists:users,id',
-      'contact' => 'required|integer|digits:11',
+      'contact' => 'required|digits:11',
       'time' => 'required|date_format:H:i|after_or_equal:09:00|before_or_equal:17:00',
     ]);
 

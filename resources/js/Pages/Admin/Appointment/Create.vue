@@ -28,8 +28,10 @@
                     />
                     <InputError :message="form.errors.age" />
                     <input
-                        type="number"
+                        type="text"
                         name="contact"
+                        maxlength="11"
+                        @keypress="numbersOnly"
                         placeholder="Contact Number"
                         v-model="form.contact"
                         required
@@ -309,6 +311,16 @@ const times = reactive([
 
 const selectTime = (selectedTime) => {
     form.time = selectedTime;
+};
+
+const numbersOnly = (evt) => {
+    evt = evt ? evt : window.event;
+    var charCode = evt.which ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46) {
+        evt.preventDefault();
+    } else {
+        return true;
+    }
 };
 </script>
 
