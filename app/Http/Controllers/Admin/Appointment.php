@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\StatusChange;
 use App\Models\Appointment as ModelsAppointment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 
@@ -73,6 +75,19 @@ class Appointment extends Controller
     $appointment = ModelsAppointment::find($request->id);
     $appointment->status = $request->status;
     $appointment->save();
+
+    $user = User::find($appointment->user_id);
+
+    Mail::to($user->email)->send(
+      new StatusChange(
+        $user->email,
+        $user->name,
+        $appointment->schedule,
+        $appointment->service,
+        $appointment->dentist->name,
+        $appointment->status
+      )
+    );
 
     return redirect()->back()->with([
       'message' => [
@@ -206,6 +221,22 @@ class Appointment extends Controller
     $appointment->status = 'rescheduled';
 
     $appointment->save();
+
+
+    // email the client
+
+    $user = User::find($appointment->user_id);
+
+    Mail::to($user->email)->send(
+      new StatusChange(
+        $user->email,
+        $user->name,
+        $appointment->schedule,
+        $appointment->service,
+        $appointment->dentist->name,
+        $appointment->status
+      )
+    );
 
 
     return redirect()->route('admin.appointment.index')->with(

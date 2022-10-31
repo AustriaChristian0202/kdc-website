@@ -30,7 +30,7 @@ class AppointmentSeeder extends Seeder
         [
           'user_id' => $client->id,
           'name' => $client->name,
-          'contact' => fake()->phoneNumber(),
+          'contact' => "09" . fake()->numberBetween(100000000, 999999999),
           'created_by' => $client->id,
           'dentist_id' => $dentist->id,
           'service' => fake()->randomElement([

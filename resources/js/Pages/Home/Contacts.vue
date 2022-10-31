@@ -1,5 +1,5 @@
 <template>
-    <section class="py-6 text-white mt-8">
+    <section id="contact" class="py-6 text-white mt-8">
         <div
             class="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 items-center"
         >
