@@ -301,7 +301,7 @@ const fetchAppointments = async (date) => {
 const times = reactive([
     { value: "09:00", text: "9:00 AM" },
     { value: "10:00", text: "10:00 AM" },
-    { value: "11:00", text: "12:00 AM" },
+    { value: "11:00", text: "11:00 AM" },
     { value: "13:00", text: "01:00 PM" },
     { value: "14:00", text: "02:00 PM" },
     { value: "15:00", text: "03:00 PM" },

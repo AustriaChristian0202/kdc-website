@@ -54,7 +54,7 @@ defineProps({
                                     ? user?.role !== 'admin'
                                         ? route('client.appointment.index')
                                         : route('admin.appointment.create')
-                                    : route('auth.sign-in')
+                                    : route('login')
                             "
                             class="border-white border-2 rounded-lg px-3 py-2 text-white hover:bg-blue-700 hover:text-slate-50 transition-all"
                         >

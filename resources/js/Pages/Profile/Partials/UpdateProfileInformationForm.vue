@@ -77,6 +77,17 @@ const clearPhotoFileInput = () => {
         photoInput.value.value = null;
     }
 };
+
+const numbersOnly = (evt) => {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode(key);
+    var regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+        theEvent.returnValue = false;
+        if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+};
 </script>
 
 <template>
@@ -162,7 +173,8 @@ const clearPhotoFileInput = () => {
                     id="email"
                     v-model="form.email"
                     type="email"
-                    class="mt-1 block w-full"
+                    disabled
+                    class="mt-1 block w-full bg-gray-100 cursor-not-allowed dark:border-gray-800"
                 />
                 <InputError :message="form.errors.email" class="mt-2" />
 
@@ -205,6 +217,8 @@ const clearPhotoFileInput = () => {
                     type="text"
                     class="mt-1 block w-full"
                     autocomplete="name"
+                    @keypress="numbersOnly"
+                    maxlength="11"
                 />
                 <InputError :message="form.errors.contact" class="mt-2" />
             </div>
@@ -219,7 +233,7 @@ const clearPhotoFileInput = () => {
                         placeholder="Age"
                         required
                         v-model="form.age"
-                        maxlength="11"
+                        maxlength="3"
                         class="bg-slate-50 w-full px-3 py-2 rounded-lg outline outline-1 outline-slate-200 placeholder:text-slate-400 hover:bg-slate-200 hover:outline-slate-300 hover:shadow-lg focus:bg-slate-200 focus:outline-slate-300 focus:shadow-lg active:bg-slate-200 active:outline-slate-300 active:shadow-lg dark:bg-slate-500 dark:outline-slate-400 dark:hover:bg-slate-600 dark:hover:outline-slate-500 dark:focus:bg-slate-600 dark:focus:outline-slate-500 dark:active:bg-slate-600 dark:active:outline-slate-500 transition-all appearance-none"
                     />
                     <InputError :message="form.errors.age" />

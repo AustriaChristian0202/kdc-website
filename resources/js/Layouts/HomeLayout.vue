@@ -85,10 +85,7 @@
                 <div
                     class="flex items-center gap-3 mr-[30px] lg:ml-[30px] lg:w-[150px] lg:flex"
                 >
-                    <Link
-                        v-if="!$page.props.user"
-                        :href="route('auth.sign-in')"
-                    >
+                    <Link v-if="!$page.props.user" :href="route('login')">
                         <button
                             class="bg-slate-50 px-3 py-2 rounded-lg font-medium outline outline-1 outline-slate-100 hover:bg-slate-200 hover:outline-slate-300 hover:text-slate-700 dark:bg-slate-900 dark:text-slate-50 dark:hover:bg-slate-700 dark:hover:text-slate-200 dark:hover:outline-slate-600 transition-all lg:w-full"
                         >
