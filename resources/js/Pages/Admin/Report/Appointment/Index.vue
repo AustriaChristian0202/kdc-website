@@ -191,11 +191,13 @@
                         <tr>
                             <th scope="col" class="p-4">ID</th>
                             <th scope="col" class="py-3 px-6">Name & Email</th>
-                            <th scope="col" class="py-3 px-6">Age</th>
-                            <th scope="col" class="py-3 px-6">Contact</th>
+                            <th scope="col" class="py-3 px-6">Contact & Age</th>
                             <th scope="col" class="py-3 px-6">Dentist</th>
                             <th scope="col" class="py-3 px-6">Service</th>
                             <th scope="col" class="py-3 px-6">Schedule</th>
+                            <th scope="col" class="py-3 px-6">
+                                Cancellation / Rejection Reason
+                            </th>
                             <th scope="col" class="py-3 px-6">Create At</th>
                             <th scope="col" class="py-3 px-6">Status</th>
                         </tr>
@@ -239,12 +241,20 @@
                                     </div>
                                 </div>
                             </th>
-                            <td class="py-4 px-6">{{ appointment.age }}</td>
-                            <td class="py-4 px-6">{{ appointment.contact }}</td>
+                            <td class="py-4 px-6">
+                                <div>
+                                    <p>{{ appointment.contact }}</p>
+                                    <p class="text-gray-500 dark:text-gray-300">
+                                        {{ appointment.age }} yrs. old
+                                    </p>
+                                </div>
+                            </td>
+
                             <td class="py-4 px-6">
                                 {{ appointment.dentist.name }}
                             </td>
                             <td class="py-4 px-6">{{ appointment.service }}</td>
+
                             <td class="py-4 px-6">
                                 {{
                                     moment(appointment.schedule).format(
@@ -252,7 +262,7 @@
                                     )
                                 }}
                             </td>
-
+                            <td class="py-4 px-6">{{ appointment.reason }}</td>
                             <td class="py-4 px-6">
                                 {{
                                     moment(appointment.created_at).format(

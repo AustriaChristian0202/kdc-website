@@ -28,6 +28,7 @@ return new class extends Migration
       $table->string('profile_photo_path', 2048)->nullable();
       $table->enum('role', ['admin', 'client'])->default('client');
       $table->timestamps();
+      $table->softDeletes();
     });
   }
   /**

@@ -1,4 +1,103 @@
 <template>
+    <Modal :show="isRejectModalShown">
+        <div class="p-4">
+            <div class="flex justify-between text-gray-700 dark:text-gray-300">
+                <div class="flex gap-1 items-center">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6 text-red-500"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                        />
+                    </svg>
+
+                    <h1 class="text-lg font-bold">Confirmation</h1>
+                </div>
+
+                <button @click="onCancel">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-4 h-4"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                        />
+                    </svg>
+                </button>
+            </div>
+            <div class="my-2 dark:text-gray-400 text-gray-700">
+                <p>
+                    This action is not reversible.Are you sure you want to
+                    Reject this appointment?
+                </p>
+            </div>
+            <div class="my-4">
+                <label
+                    for="message"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Rejection Reason</label
+                >
+                <select
+                    id="countries"
+                    @change="onChangeReason"
+                    class="bg-gray-50 mb-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                    <option selected>Choose a reason</option>
+                    <option
+                        value="Resources/ Equipment’s for the service is unavailable"
+                    >
+                        Resources/ Equipment’s for the service is unavailable
+                    </option>
+                    <option value="Unavailable">Unavailable</option>
+                    <option value="Due to prior commitments">
+                        Due to prior commitments
+                    </option>
+                    <option value="Due to urgent matters">
+                        Due to urgent matters
+                    </option>
+                    <option value="other">Others</option>
+                </select>
+                <textarea
+                    v-show="showTextArea"
+                    id="reason"
+                    rows="4"
+                    v-model="form.reason"
+                    class="block mb-2 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Write your reason why do you want to reject..."
+                ></textarea>
+                <InputError :message="form.errors.reason" />
+            </div>
+            <div class="flex gap-2 items-center justify-end">
+                <button
+                    type="button"
+                    @click.prevent="onCancel"
+                    class="dark:text-gray-300 text-gray-700 dark:border-gray-800 border-2 rounded-lg py-1 px-4 hover:border-gray-900 hover:shadow-lg"
+                >
+                    No
+                </button>
+                <button
+                    type="submit"
+                    @click.prevent="onClickYes"
+                    class="dark:text-gray-300 rounded-lg px-4 py-1 border-2 dark:border-gray-800 text-gray-50 hover:bg-blue-900 hover:dark:bg-gray-900 border-blue-500 hover:shadow-lg bg-blue-500 dark:bg-gray-800"
+                >
+                    Yes
+                </button>
+            </div>
+        </div>
+    </Modal>
     <AdminLayout>
         <Head title="Admin Appointments" />
 
@@ -186,10 +285,14 @@
                             <tr>
                                 <th scope="col" class="py-3 px-6">ID</th>
                                 <th scope="col" class="py-3 px-6">Name</th>
-                                <th scope="col" class="py-3 px-6">Contact</th>
-                                <th scope="col" class="py-3 px-6">Age</th>
+                                <th scope="col" class="py-3 px-6">
+                                    Contact & Age
+                                </th>
                                 <th scope="col" class="py-3 px-6">Service</th>
                                 <th scope="col" class="py-3 px-6">Dentist</th>
+                                <th scope="col" class="py-3 px-6">
+                                    Cancellation/Reject Reason
+                                </th>
                                 <th scope="col" class="py-3 px-6">
                                     Appointment Date
                                 </th>
@@ -234,12 +337,20 @@
                                         </div>
                                     </div>
                                 </th>
-                                <td class="py-4 px-6">{{ item.contact }}</td>
-                                <td class="py-4 px-6">{{ item.age }}</td>
+                                <td class="py-4 px-6">
+                                    <div>
+                                        <div class="text-sm">
+                                            {{ item.contact }}
+                                        </div>
+                                        <div>{{ item.age }} yrs. old</div>
+                                    </div>
+                                </td>
+
                                 <td class="py-4 px-6">{{ item.service }}</td>
                                 <td class="py-4 px-6">
                                     {{ item.dentist.name }}
                                 </td>
+                                <td class="py-4 px-6">{{ item.reason }}</td>
                                 <td class="py-4 px-6">
                                     <!-- convert to date time using moment js-->
                                     {{
@@ -267,14 +378,7 @@
                                 </td>
                                 <td class="py-4 px-6">
                                     <div class="flex gap-2 items-center">
-                                        <button
-                                            @click="
-                                                onStatusChange(
-                                                    'rejected',
-                                                    item.id
-                                                )
-                                            "
-                                        >
+                                        <button @click="onRejectShown(item.id)">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="none"
@@ -388,7 +492,10 @@ import { reactive, watch } from "vue";
 import throttle from "lodash/throttle";
 import pickBy from "lodash/pickBy";
 import moment from "moment";
-import { Head, Link } from "@inertiajs/inertia-vue3";
+import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+import Modal from "@/Components/Modal.vue";
+import { ref } from "vue";
+import InputError from "@/Components/InputError.vue";
 const props = defineProps({
     // props
     appointments: {
@@ -431,12 +538,50 @@ const onStatusChange = (status, id) => {
     });
 };
 
+const isRejectModalShown = ref(false);
+const showTextArea = ref(false);
+let id = null;
+
+const onChangeReason = (e) => {
+    let value = e.target.value;
+    if (value === "other") {
+        showTextArea.value = true;
+        form.reason = "";
+        return;
+    }
+    showTextArea.value = false;
+    form.reason = value;
+};
+
+const onCancel = () => {
+    isRejectModalShown.value = false;
+};
+
+const onRejectShown = (appointment_id) => {
+    isRejectModalShown.value = true;
+    id = appointment_id;
+};
+
+const onClickYes = () => {
+    form.post(route("admin.appointment.reject", id), {
+        preserveScroll: true,
+        onSuccess: () => {
+            isRejectModalShown.value = false;
+            form.reset();
+        },
+    });
+};
+
 const params = reactive({
     search: props.filters.search ?? "",
     status: props.filters.status ?? "",
     service: props.filters.service ?? "",
     start_date: props.filters.start_date ?? "",
     end_date: props.filters.end_date ?? "",
+});
+
+const form = useForm({
+    reason: "",
 });
 
 const clearParams = () => {

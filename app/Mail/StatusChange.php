@@ -19,7 +19,7 @@ class StatusChange extends Mailable
    *
    * @return void
    */
-  public function __construct($email, $name, $schedule, $service, $dentist, $status)
+  public function __construct($email, $name, $schedule, $service, $dentist, $status, $reason = null)
   {
     //
     $this->email = $email;
@@ -28,6 +28,7 @@ class StatusChange extends Mailable
     $this->service = $service;
     $this->dentist = $dentist;
     $this->status = $status;
+    $this->reason = $reason;
   }
 
   /**
@@ -74,6 +75,7 @@ class StatusChange extends Mailable
         'service' => $this->service,
         'dentist' => $this->dentist,
         'status' => $this->status,
+        'reason' => $this->reason,
       ]);
   }
 }

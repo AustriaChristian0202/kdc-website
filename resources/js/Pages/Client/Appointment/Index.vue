@@ -284,7 +284,9 @@
                                     Appointment System. The KSD will provide the
                                     appointee an access and correct to the
                                     appropriate Personal Data under applicable
-                                    data privacy and protection laws.
+                                    data privacy and protection laws. Scheduled
+                                    Appointments are prioritized by the clinic
+                                    than Walk-in Patients.
                                 </p>
                                 <p class="my-2">
                                     By Clicking the

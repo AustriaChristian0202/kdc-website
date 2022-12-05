@@ -43,6 +43,7 @@ class AppointmentExport implements FromCollection, WithMapping, WithHeadings, Wi
       $appointment->causer?->name ?? 'N/A',
       $appointment->service,
       Carbon::parse($appointment->schedule)->format('M d, Y h:i A'),
+      $appointment->reason,
       $appointment->status,
       $appointment->created_at,
     ];
@@ -60,6 +61,7 @@ class AppointmentExport implements FromCollection, WithMapping, WithHeadings, Wi
       'Created By',
       'Service',
       'Schedule',
+      'Cancellation / Rejection Reason',
       'Status',
       'Created At',
     ];
@@ -104,12 +106,15 @@ class AppointmentExport implements FromCollection, WithMapping, WithHeadings, Wi
     $sheet->getStyle('I')->getAlignment()->setWrapText(true);
 
     // Status
-    $sheet->getColumnDimension('J')->setWidth(15);
+    $sheet->getColumnDimension('J')->setWidth(25);
     $sheet->getStyle('J')->getAlignment()->setWrapText(true);
 
     // Created At
-    $sheet->getColumnDimension('K')->setWidth(20);
+    $sheet->getColumnDimension('K')->setWidth(15);
     $sheet->getStyle('K')->getAlignment()->setWrapText(true);
+
+    $sheet->getColumnDimension('L')->setWidth(20);
+    $sheet->getStyle('L')->getAlignment()->setWrapText(true);
 
 
     $sheet->getStyle($sheet->calculateWorksheetDimension())
@@ -131,7 +136,7 @@ class AppointmentExport implements FromCollection, WithMapping, WithHeadings, Wi
         ],
       ]);
 
-    $sheet->getStyle('A1:K1')->applyFromArray([
+    $sheet->getStyle('A1:L1')->applyFromArray([
       'font' => [
         'bold' => true,
         'size' => 11,

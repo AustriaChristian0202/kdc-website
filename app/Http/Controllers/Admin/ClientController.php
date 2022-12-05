@@ -35,6 +35,8 @@ class ClientController extends Controller
   public function destroy($id)
   {
     $client = User::find($id);
+    // soft delete
+
     $client->delete();
 
     return redirect()->back()->with([

@@ -2,7 +2,7 @@
     <ClientLayout>
         <div class="max-w-5xl mx-auto pt-20 pb-20">
             <div class="w-full">
-                <div class="mb-4">
+                <div class="mb-8">
                     <h1
                         class="dark:text-gray-300 text-gray-700 font-bold text-lg"
                     >
@@ -11,6 +11,23 @@
                     <p class="text-gray-500">
                         These are the list of you've created appointments
                     </p>
+                    <div
+                        class="p-2 mt-1 text-yellow-900 dark:text-yellow-50 dark:bg-yellow-700 bg-yellow-100 rounded-lg flex items-start gap-2"
+                    >
+                        <div class="text-3xl font-bold">Note:</div>
+                        <div class="text-sm">
+                            <div>
+                                Appointments can be
+                                <span class="font-bold">cancelled</span> only 1
+                                day prior to the scheduled date.
+                            </div>
+                            <div>
+                                You are allowed to
+                                <span class="font-bold">reschedule</span> your
+                                appointment 1 day prior to your scheduled date
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -191,6 +208,38 @@
                         cancel this appointment?
                     </p>
                 </div>
+                <div class="my-4">
+                    <label
+                        for="message"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Cancellation Reason</label
+                    >
+                    <select
+                        id="countries"
+                        @change="onChangeReason"
+                        class="bg-gray-50 mb-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >
+                        <option selected>Choose a reason</option>
+                        <option value="Due to prior commitments">
+                            Due to prior commitments
+                        </option>
+                        <option value="Due to urgent matters">
+                            Due to urgent matters
+                        </option>
+                        <option value="Feeling unwell">Feeling unwell</option>
+                        <option value="Unavailable">Unavailable</option>
+                        <option value="other">Others</option>
+                    </select>
+                    <textarea
+                        v-show="isOther"
+                        id="reason"
+                        rows="4"
+                        v-model="form.reason"
+                        class="block mb-2 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Write your reason why do you want to cancel..."
+                    ></textarea>
+                    <InputError :message="form.errors.reason" />
+                </div>
                 <div class="flex gap-2 items-center justify-end">
                     <button
                         type="button"
@@ -214,11 +263,13 @@
 
 <script setup>
 import ClientLayout from "@/Layouts/ClientLayout.vue";
+import InputError from "@/Components/InputError.vue";
 import Modal from "@/Components/Modal.vue";
 import moment from "moment";
 import { ref } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/inertia-vue3";
 defineProps({
     appointments: {
         type: Array,
@@ -228,6 +279,22 @@ defineProps({
 
 const isCancelShow = ref(false);
 const cancelAppointmentId = ref(null);
+const form = useForm({
+    reason: "",
+});
+
+const isOther = ref(false);
+
+const onChangeReason = (e) => {
+    let value = e.target.value;
+    if (value === "other") {
+        isOther.value = true;
+        form.reason = "";
+        return;
+    }
+    isOther.value = false;
+    form.reason = value;
+};
 
 const showCancelAppointment = (id) => {
     isCancelShow.value = true;
@@ -240,7 +307,7 @@ const hideCancelAppointment = () => {
 };
 
 const onCancel = () => {
-    Inertia.delete(
+    form.delete(
         route("client.appointment.destroy", cancelAppointmentId.value),
         {
             preserveState: true,

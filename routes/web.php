@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Client\AppointmentController;
+use Spatie\GoogleCalendar\Event;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +69,7 @@ Route::middleware([
           Route::get('create', 'create')->name('create');
           Route::get('reschedule/{appointment_id}', 'rescheduleForm')->name('reschedule-form');
           Route::post('reschedule/{appointment_id}', 'reschedule')->name('reschedule');
+          Route::post('reject/{id}', 'onReject')->name('reject');
         });
 
       Route::get('force-send-email', function () {
@@ -96,8 +98,23 @@ Route::middleware([
         return Inertia::render('Profile/AdminProfile');
       })->name('profile.index');
     });
+
+  Route::get('test-calendar', function () {
+    Event::create([
+      'name' => 'A new event',
+      'startDateTime' => Carbon\Carbon::now(),
+      'endDateTime' => Carbon\Carbon::now()->addHour(),
+    ]);
+  });
 });
 
+Route::get('test-calendar', function () {
+  Event::create([
+    'name' => 'A new event',
+    'startDateTime' => Carbon\Carbon::now(),
+    'endDateTime' => Carbon\Carbon::now()->addHour(),
+  ]);
+});
 
 Route::middleware(['guest'])->group(function () {
   Route::get('/auth/sign-in', function () {

@@ -19,22 +19,22 @@ class DentistSeeder extends Seeder
     $dentists = [
       [
         'name' => 'Dr. Raymond S. Kasilag',
-        'email' => 'dentist1@mail.com',
-        'password' => Hash::make('password'),
+        'email' => 'raymond_kasilag@gmail.com',
+        'password' => Hash::make('Admin123'),
         'role' => 'admin',
         'email_verified_at' => now(),
       ],
       [
         'name' => 'Dr. Desiree Z. Kasilag',
-        'email' => 'dentist2@mail.com',
-        'password' => Hash::make('password'),
+        'email' => 'desiree_kasilag@gmail.com',
+        'password' => Hash::make('Admin123'),
         'role' => 'admin',
         'email_verified_at' => now(),
       ],
       [
         'name' => 'Dr. Mark S. Kasilag',
-        'email' => 'dentist3@mail.com',
-        'password' => Hash::make('password'),
+        'email' => 'mark_kasilag@gmail.com',
+        'password' => Hash::make('Admin123'),
         'role' => 'admin',
         'email_verified_at' => now(),
       ]

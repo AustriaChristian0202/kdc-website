@@ -26,17 +26,6 @@
                     <p>© Copy Right Kasilag Dental Clinic</p>
                 </ul>
             </div>
-            <ul class="flex flex-wrap pl-3 space-x-4 sm:space-x-8">
-                <li>
-                    <a rel="noopener noreferrer" href="#">Instagram</a>
-                </li>
-                <li>
-                    <a rel="noopener noreferrer" href="#">Facebook</a>
-                </li>
-                <li>
-                    <a rel="noopener noreferrer" href="#">Twitter</a>
-                </li>
-            </ul>
         </div>
     </footer>
 </template>

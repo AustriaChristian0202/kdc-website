@@ -20,6 +20,7 @@ return new class extends Migration
       $table->string('name');
       $table->integer('age');
       $table->string('contact');
+      $table->string('reason')->nullable();
       $table->enum('service', [
         "Consultation",
         "Teeth Whitening",
@@ -32,7 +33,7 @@ return new class extends Migration
         "Root Canal Therapy"
       ]);
       $table->dateTime('schedule');
-      $table->unsignedBigInteger('dentist_id');
+      $table->unsignedBigInteger('dentist_id')->nullable();
       $table->enum('sex', ['male', 'female']);
       $table->enum('status', [
         'pending', 'approved', 'rejected', 'cancelled', 'rescheduled'

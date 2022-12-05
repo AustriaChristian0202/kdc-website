@@ -248,4 +248,40 @@ class Appointment extends Controller
       ]
     );
   }
+
+  public function onReject(Request $request, $id)
+  {
+
+
+
+    $request->validate([
+      'reason' => 'required|string|max:255',
+    ]);
+
+    $appointment = ModelsAppointment::find($id);
+    $appointment->status = 'rejected';
+    $appointment->reason = $request->reason;
+    $appointment->save();
+
+    $user = User::find($appointment->user_id);
+
+    Mail::to($user->email)->send(
+      new StatusChange(
+        $user->email,
+        $user->name,
+        $appointment->schedule,
+        $appointment->service,
+        $appointment->dentist->name,
+        $appointment->status,
+        $appointment->reason,
+      )
+    );
+
+    return redirect()->back()->with([
+      'message' => [
+        'type' => 'success',
+        'content' => 'Appointment rejected successfully',
+      ]
+    ]);
+  }
 }
